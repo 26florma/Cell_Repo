@@ -27,7 +27,7 @@ public class PlayerMomentScript : MonoBehaviour
     {
       if(collision.gameObject.CompareTag("germ"))
       {
-        
+        Debug.Log("collision detected");
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             Debug.Log("Hit Detected");
