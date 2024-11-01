@@ -7,6 +7,7 @@ public class GermMovement : MonoBehaviour
 {
     public GameObject nucleus;
     public float movementSpeed =10;
+    public int germHP = 3;
 
     // Start is called before the first frame update
     void Start()

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMomentScript : MonoBehaviour
@@ -14,6 +15,7 @@ public class PlayerMomentScript : MonoBehaviour
     void Start()
     {
         germs = GameObject.FindGameObjectWithTag("germ");
+        
     }
 
     // Update is called once per frame
@@ -26,6 +28,7 @@ public class PlayerMomentScript : MonoBehaviour
         {
             Debug.Log("Hit Detected");
             DNA = 1;
+            germs.GetComponent<GermMovement>().germHP == -damage;
             
         }
     }
