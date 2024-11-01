@@ -9,7 +9,7 @@ public class PlayerMomentScript : MonoBehaviour
     public GameObject germs;
     public int stemCellBar;
     public int DNA;
-
+    private bool collisionWithGerm;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,19 +21,30 @@ public class PlayerMomentScript : MonoBehaviour
     {
         Vector2 mousePos =Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.position = mousePos;
+        
+        if (Input.GetKeyDown(KeyCode.Mouse0) && collisionWithGerm)
+        {
+            Debug.Log("Hit Detected");
+            DNA = 1;
+            
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
       if(collision.gameObject.CompareTag("germ"))
       {
-        Debug.Log("collision detected");
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            Debug.Log("Hit Detected");
-            DNA = 1;
-        }
+            Debug.Log("collision detected");
+            collisionWithGerm = true;
       }
       
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("germ"))
+        {
+            collisionWithGerm = false;
+        }
+
     }
 }
