@@ -8,6 +8,7 @@ public class PlayerMomentScript : MonoBehaviour
     public int stemCells;
     public int damage = 1;
     public GameObject germs;
+    private int germsHP;
     public int stemCellBar;
     public int DNA;
     private bool collisionWithGerm;
@@ -15,7 +16,7 @@ public class PlayerMomentScript : MonoBehaviour
     void Start()
     {
         germs = GameObject.FindGameObjectWithTag("germ");
-        
+        germsHP = GetComponent<GermMovement>().germHP;
     }
 
     // Update is called once per frame
@@ -28,7 +29,7 @@ public class PlayerMomentScript : MonoBehaviour
         {
             Debug.Log("Hit Detected");
             DNA = 1;
-            germs.GetComponent<GermMovement>().germHP == -damage;
+            germsHP = -damage;
             
         }
     }
