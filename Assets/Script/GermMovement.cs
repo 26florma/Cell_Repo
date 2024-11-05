@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -22,17 +23,17 @@ public class GermMovement : MonoBehaviour
           distance = Vector3. Distance(this.transform.position, AllObjects[i]. transform.position);
       
              if(distance ‹ nearestDistance)
-             {
-                NearestNucl = AllObjects [i];
+            {
+                NearestNucl = AllObjects[i];
                 nearestDistance = distance;
-             }
+            }
           }
      }
 
     // Update is called once per frame
     void Update()
     {
-         transfrom.rotation = NearestNucl
-         transfrom.Translate(Vector3.Forward * Time.deltaTime)
+        transform.rotation = NearestNucl;
+        transform.Translate(Vector3.forward * Time.deltaTime);
     }
 }

@@ -208,7 +208,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -227,7 +227,7 @@ GameObject:
   - component: {fileID: 630391164}
   m_Layer: 0
   m_Name: Nucleus
-  m_TagString: Untagged
+  m_TagString: Nucl
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -333,6 +333,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nucleus: {fileID: 630391163}
   movementSpeed: 50
+  germHP: 3
 --- !u!212 &1440540041
 SpriteRenderer:
   m_ObjectHideFlags: 0
