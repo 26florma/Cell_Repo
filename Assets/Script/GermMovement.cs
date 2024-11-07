@@ -33,7 +33,7 @@ public class GermMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.rotation = NearestNucl;
-        transform.Translate(Vector3.forward * Time.deltaTime);
+        Vector3 lookDirection = (NearestNucl.transform.position - transform.position).normalized;
+        AddForce(lookDirection * movementSpeed);
     }
 }
