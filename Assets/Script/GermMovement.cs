@@ -19,25 +19,24 @@ public class GermMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       GermRb = GetComponent<Rigidbody2D>();
-       AllObjects = GameObject.FindGameObjectsWithTag("Nucl");
-      
-     for (int i = 0; i < AllObjects.Length; i++)
-         {
-          distance = Vector3. Distance(this.transform.position, AllObjects[i]. transform.position);
-      
-             if(distance < nearestDistance)
-            {
-                NearestNucl = AllObjects[i];
-                nearestDistance = distance;
-            }
-          }
-     }
+        GermRb = GetComponent<Rigidbody2D>();
+        AllObjects = GameObject.FindGameObjectsWithTag("Nucl");
+    }
 
     // Update is called once per frame
     void Update()
     {
 
+        for (int i = 0; i < AllObjects.Length; i++)
+        {
+            distance = Vector3.Distance(this.transform.position, AllObjects[i].transform.position);
+
+            if (distance < nearestDistance)
+            {
+                NearestNucl = AllObjects[i];
+                nearestDistance = distance;
+            }
+        }
         Vector2 lookDirection = (NearestNucl.transform.position - transform.position).normalized;
         GermRb.AddForce(lookDirection * movementSpeed);
     }
