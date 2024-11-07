@@ -13,9 +13,13 @@ public class GermMovement : MonoBehaviour
     public GameObject NearestNucl;
     public float distance;
     public float nearestDistance = 10000;
+
+    private Rigidbody2D GermRb;
+
     // Start is called before the first frame update
     void Start()
     {
+       GermRb = GetComponent<Rigidbody2D>();
        AllObjects = GameObject.FindGameObjectsWithTag("Nucl");
       
      for (int i = 0; i < AllObjects.Length; i++)
@@ -33,7 +37,8 @@ public class GermMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 lookDirection = (NearestNucl.transform.position - transform.position).normalized;
-        AddForce(lookDirection * movementSpeed);
+
+        Vector2 lookDirection = (NearestNucl.transform.position - transform.position).normalized;
+        GermRb.AddForce(lookDirection * movementSpeed);
     }
 }

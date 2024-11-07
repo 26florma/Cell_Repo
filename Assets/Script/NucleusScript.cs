@@ -5,7 +5,7 @@ using UnityEngine;
 public class NucleusScript : MonoBehaviour
 {
     public int NuclHP = 20;
-    
+    private bool NuclDead = false;
     
     // Start is called before the first frame update
     void Start()
@@ -16,9 +16,9 @@ public class NucleusScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(NuclHP = 0) 
+        if(NuclDead == true) 
         {
-            Destroy(gameObject)
+            Destroy(gameObject);
         }
     }
 }
