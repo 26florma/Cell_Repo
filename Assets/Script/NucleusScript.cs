@@ -19,7 +19,7 @@ public class NucleusScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(NuclHP =< 0)
+        if(NuclHP <= 0)
         {
             Destroy(gameOject);
         }
@@ -29,7 +29,7 @@ public class NucleusScript : MonoBehaviour
     {
       if (hit = true)
       {
-        NuclHP =- germ.Getcomponet<germD>;
+        NuclHP =- germ.Getcomponet<GermMovement>(germD);
       }
     }
     //detection for hit
@@ -37,7 +37,7 @@ public class NucleusScript : MonoBehaviour
     {
      if(collision.gameObject.CompareTag("germ"))
      {
-       hit = true
+            hit = true;
      }
     }
 }

@@ -7,14 +7,13 @@ public class PlayerMomentScript : MonoBehaviour
 {
     public int stemCells;
     public int damage = 1;
-    public GameObject germs;
+    public GameObject germ;
     public int stemCellBar;
     public int DNA;
     private bool collisionWithGerm;
     // Start is called before the first frame update
     void Start()
     {
-        germs = GameObject.FindGameObjectWithTag("germ");
         
     }
 
@@ -28,7 +27,8 @@ public class PlayerMomentScript : MonoBehaviour
         {
             Debug.Log("Hit Detected");
             DNA = 1;
-            germ.getcomponet<germHP> =- damage;
+
+            germ.GetComponent<GermMovement>(germHP) =- damage;
             
         }
     }
