@@ -13,7 +13,8 @@ public class GermMovement : MonoBehaviour
     public GameObject NearestNucl;
     public float distance;
     public float nearestDistance = 10000;
-
+    public int germD = 1;
+    
     private Rigidbody2D GermRb;
 
     // Start is called before the first frame update
