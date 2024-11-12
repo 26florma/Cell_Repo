@@ -14,7 +14,7 @@ public class GermMovement : MonoBehaviour
     public float distance;
     public float nearestDistance = 10000;
     public int germD = 1;
-    
+    public bool NuclAlive = false;
     private Rigidbody2D GermRb;
 
     // Start is called before the first frame update
@@ -27,18 +27,35 @@ public class GermMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        for (int i = 0; i < AllObjects.Length; i++)
+      if(AllObjects != null)
         {
-            distance = Vector3.Distance(this.transform.position, AllObjects[i].transform.position);
-
-            if (distance < nearestDistance)
-            {
-                NearestNucl = AllObjects[i];
-                nearestDistance = distance;
-            }
+            NuclAlive = true;
         }
-        Vector2 lookDirection = (NearestNucl.transform.position - transform.position).normalized;
-        GermRb.AddRelativeForce(lookDirection * movementSpeed);
+        if (NuclAlive = false)
+        {
+            Destroy(gameObject);
+        }
+      if(AllObjects != null)
+      {
+          for (int i = 0; i < AllObjects.Length; i++)
+          {
+                distance = Vector3.Distance(this.transform.position, AllObjects[i].transform.position);
+
+                if (distance < nearestDistance)
+                {
+                    NearestNucl = AllObjects[i];
+                    nearestDistance = distance;
+                }
+          }
+          if(NearestNucl!= null && AllObjects != null)
+          {
+                Vector2 lookDirection = (NearestNucl.transform.position - transform.position).normalized;
+                GermRb.AddForce(lookDirection * movementSpeed, ForceMode2D.Force);
+          }
+          
+            
+      }
+        
     }
+
 }

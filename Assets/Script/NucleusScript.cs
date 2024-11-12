@@ -7,7 +7,7 @@ public class NucleusScript : MonoBehaviour
     public int NuclHP = 20;
     
     private bool hit = false;
-    private bool NuclDead = false;
+    
     private GameObject germ;
     
     // Start is called before the first frame update
@@ -26,7 +26,8 @@ public class NucleusScript : MonoBehaviour
         }
         if (hit == true)
         {
-            NuclHP -= germ.GetComponent<GermMovement>().germD;
+          NuclHP -= germ.GetComponent<GermMovement>().germD;
+            Debug.Log("nucleus detected hit");
         }
     }
     //detection for hit
@@ -39,7 +40,7 @@ public class NucleusScript : MonoBehaviour
     }
     void OnTriggerExit2D(Collider2D collision)
     {
-     if(collision.GameObject.CompareTag("germ"))
+     if(collision.gameObject.CompareTag("germ"))
      {
             hit = false;
      }
