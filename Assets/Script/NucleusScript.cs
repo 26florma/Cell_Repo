@@ -26,7 +26,7 @@ public class NucleusScript : MonoBehaviour
         }
         if (hit == true)
         {
-            NuclHP = -germ.GetComponent<GermMovement>().germD;
+            NuclHP -= germ.GetComponent<GermMovement>().germD;
         }
     }
     //detection for hit
@@ -35,6 +35,13 @@ public class NucleusScript : MonoBehaviour
      if(collision.gameObject.CompareTag("germ"))
      {
             hit = true;
+     }
+    }
+    void OnTriggerExit2D(Collider2D collision)
+    {
+     if(collision.GameObject.CompareTag("germ"))
+     {
+            hit = false;
      }
     }
 }
