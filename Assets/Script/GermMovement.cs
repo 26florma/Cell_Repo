@@ -39,6 +39,6 @@ public class GermMovement : MonoBehaviour
             }
         }
         Vector2 lookDirection = (NearestNucl.transform.position - transform.position).normalized;
-        GermRb.AddForce(lookDirection * movementSpeed);
+        GermRb.AddRelativeForce(lookDirection * movementSpeed);
     }
 }
