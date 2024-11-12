@@ -28,7 +28,7 @@ public class PlayerMomentScript : MonoBehaviour
             Debug.Log("Hit Detected");
             DNA = 1;
 
-            germ.GetComponent<GermMovement>().GermHP =- damage;
+            germ.GetComponent<GermMovement>().GermHP -= damage;
             
         }
     }
