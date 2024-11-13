@@ -31,7 +31,7 @@ public class GermMovement : MonoBehaviour
         {
             NuclAlive = true;
         }
-        if (NuclAlive = false)
+        if (NuclAlive == false)
         {
             Destroy(gameObject);
         }
