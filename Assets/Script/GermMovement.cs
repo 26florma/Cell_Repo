@@ -14,47 +14,50 @@ public class GermMovement : MonoBehaviour
     public float distance;
     public float nearestDistance = 10000;
     public int germD = 1;
-    public bool NuclAlive = false;
+
     private Rigidbody2D GermRb;
 
     // Start is called before the first frame update
     void Start()
     {
         GermRb = GetComponent<Rigidbody2D>();
-        AllObjects = GameObject.FindGameObjectsWithTag("Nucl");
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-      if(AllObjects != null)
+
+        AllObjects = GameObject.FindGameObjectsWithTag("Nucl");
+        if (AllObjects != null)
         {
-            NuclAlive = true;
-        }
-        if (NuclAlive == false)
-        {
-            Destroy(gameObject);
-        }
-      if(AllObjects != null)
-      {
           for (int i = 0; i < AllObjects.Length; i++)
           {
-                distance = Vector3.Distance(this.transform.position, AllObjects[i].transform.position);
-
-                if (distance < nearestDistance)
+                if (AllObjects[i] != null)
                 {
-                    NearestNucl = AllObjects[i];
-                    nearestDistance = distance;
+                    distance = Vector3.Distance(this.transform.position, AllObjects[i].transform.position);
+
+                    if (distance < nearestDistance)
+                    {
+                        NearestNucl = AllObjects[i];
+                        
+                    }
                 }
+                
+                
           }
           if(NearestNucl!= null && AllObjects != null)
           {
-                Vector2 lookDirection = (NearestNucl.transform.position - transform.position).normalized;
-                GermRb.AddForce(lookDirection * movementSpeed, ForceMode2D.Force);
+                Vector3 lookDirection = (NearestNucl.transform.position - transform.position).normalized;
+                transform.Translate( Vector3.forward * Time.deltaTime * movementSpeed);
+                //problem with code it only is effecting the
+                transform.TransformDirection( lookDirection );
+                return;
           }
           
+          
             
-      }
+        }
         
     }
 

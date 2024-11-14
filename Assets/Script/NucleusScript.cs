@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor.UIElements;
 using UnityEngine;
 
 public class NucleusScript : MonoBehaviour
@@ -23,6 +25,7 @@ public class NucleusScript : MonoBehaviour
         if(NuclHP <= 0)
         {
             Destroy(gameObject);
+            germ.GetComponent<GermMovement>().NearestNucl = null;
         }
         if (hit == true)
         {

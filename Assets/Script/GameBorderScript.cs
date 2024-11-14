@@ -32,6 +32,7 @@ public class GameBorderScript : MonoBehaviour
                 Newposition.y = corner1.transform.position.y;
                 Drone.transform.position = Newposition;
                 Debug.Log("detected y");
+
             }
 
         }
