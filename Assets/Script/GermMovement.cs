@@ -21,13 +21,22 @@ public class GermMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Void FindNearestObject();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //calculates the nearest objects distance from the germ
+          //moves germ in the direction of nearest object
+          if(NearestNucl!= null)
+          {
+                Vector3 lookDirection = (NearestNucl.transform.position - transform.position).normalized;
+                transform.Translate( lookDirection * Time.deltaTime * movementSpeed, Space.World);   
+          }  
+    }
+    Void FindNearestObject()
+    {
+     //calculates the nearest objects distance from the germ
         AllObjects = GameObject.FindGameObjectsWithTag("Nucl");
         if (AllObjects.Length > 0)
         {
@@ -35,33 +44,20 @@ public class GermMovement : MonoBehaviour
           
           for (int i = 0; i < AllObjects.Length; i++)
           {
-                if (AllObjects[i] != null)
-                {
-                     Vector3 targetPos = AllObjects[i].transform.position
-                    distance = Vector3.Distance(transform.position,targetPos);
+           if (AllObjects[i] != null)
+           {
+             Vector3 targetPos = AllObjects[i].transform.position
+             distance = Vector3.Distance(transform.position,targetPos);
 
-                    if (distance < nearestDistance)
-                    {
-                        nearestDistance = distance;
-                        NearestNucl = AllObjects[i];
+             if (distance < nearestDistance)
+             {
+              nearestDistance = distance;
+              NearestNucl = AllObjects[i];
                         
-                    }
-                }
-                
-                
-          }
-          //moves germ in the direction of nearest object
-          if(NearestNucl!= null)
-          {
-                Vector3 lookDirection = (NearestNucl.transform.position - transform.position).normalized;
-                transform.Translate( lookDirection * Time.deltaTime * movementSpeed, Space.World);
-                
-          }
-          
-          
-            
+             }
+           }
+         }
         }
-        
     }
-
+    
 }
