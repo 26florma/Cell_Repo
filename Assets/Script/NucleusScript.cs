@@ -15,6 +15,7 @@ public class NucleusScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //delete if new solution works
         germ = GameObject.FindGameObjectWithTag("germ");
     }
 
@@ -27,18 +28,19 @@ public class NucleusScript : MonoBehaviour
             germ.GetComponent<GermMovement>().NearestNucl = null;
             germ.GetComponent<GermMovement>().FindNearestObject();
         }
-        if (hit == true)
-        {
-          NuclHP -= germ.GetComponent<GermMovement>().germD;
-            Debug.Log("nucleus detected hit");
-        }
+
     }
     //detection for hit
     void OnTriggerEnter2D(Collider2D collision)
     {
      if(collision.gameObject.CompareTag("germ"))
      {
-            hit = true;
+        hit = true;
+        if (hit == true)
+        {
+          NuclHP -= collision.GameObject.GetComponent<GermMovement>().germD;
+          Debug.Log("nucleus detected hit");
+        }
      }
     }
     void OnTriggerExit2D(Collider2D collision)
