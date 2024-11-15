@@ -37,6 +37,7 @@ public class GermMovement : MonoBehaviour
     public Void FindNearestObject()
     {
      //calculates the nearest objects distance from the germ
+        AllObjects[i].RemoveAll(i == null)
         AllObjects = GameObject.FindGameObjectsWithTag("Nucl");
         if (AllObjects.Length > 0)
         {
