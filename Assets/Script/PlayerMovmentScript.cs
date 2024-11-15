@@ -32,7 +32,7 @@ public class PlayerMomentScript : MonoBehaviour
 
             germ.GetComponent<GermMovement>().germHP -= damage;
         }
-        if (stemCellLimit = DNA)
+        if (stemCellLimit == DNA)
         {
             stemCells =+ 1;
             DNA = 0;

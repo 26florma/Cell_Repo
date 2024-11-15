@@ -21,7 +21,7 @@ public class GermMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Void FindNearestObject();
+        FindNearestObject();
     }
 
     // Update is called once per frame
@@ -34,20 +34,20 @@ public class GermMovement : MonoBehaviour
                 transform.Translate( lookDirection * Time.deltaTime * movementSpeed, Space.World);   
           }  
     }
-    public Void FindNearestObject()
+    public void FindNearestObject()
     {
-     //calculates the nearest objects distance from the germ
-        AllObjects[i].RemoveAll(i == null)
+        //calculates the nearest objects distance from the germ
+        
         AllObjects = GameObject.FindGameObjectsWithTag("Nucl");
         if (AllObjects.Length > 0)
         {
-          nearestDistance = 10000f
+            nearestDistance = 10000f;
           
           for (int i = 0; i < AllObjects.Length; i++)
           {
            if (AllObjects[i] != null)
            {
-             Vector3 targetPos = AllObjects[i].transform.position
+             Vector3 targetPos = AllObjects[i].transform.position;
              distance = Vector3.Distance(transform.position,targetPos);
 
              if (distance < nearestDistance)

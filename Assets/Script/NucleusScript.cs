@@ -36,10 +36,14 @@ public class NucleusScript : MonoBehaviour
      if(collision.gameObject.CompareTag("germ"))
      {
         hit = true;
-        if (hit == true)
+        for (int i = 0;  i <= NuclHP; i++ )
         {
-          NuclHP -= collision.GameObject.GetComponent<GermMovement>().germD;
-          Debug.Log("nucleus detected hit");
+                if (hit == true)
+                {
+                    NuclHP -= collision.gameObject.GetComponent<GermMovement>().germD;
+                    Debug.Log("nucleus detected hit");
+                }
+          
         }
      }
     }
