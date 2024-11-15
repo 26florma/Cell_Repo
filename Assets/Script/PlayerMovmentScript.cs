@@ -8,8 +8,10 @@ public class PlayerMomentScript : MonoBehaviour
     public int stemCells;
     public int damage = 1;
     public GameObject germ;
-    public int stemCellBar;
+    public int stemCellBar = 5;
     public int DNA;
+
+    private int stemCellLimit;
     private bool collisionWithGerm;
     // Start is called before the first frame update
     void Start()
@@ -29,8 +31,13 @@ public class PlayerMomentScript : MonoBehaviour
             DNA =+ 1;
 
             germ.GetComponent<GermMovement>().germHP -= damage;
-            
         }
+        if (stemCellLimit = DNA)
+        {
+            stemCells =+ 1;
+            DNA = 0;
+        }
+        
     }
 
     void OnTriggerEnter2D(Collider2D collision)
