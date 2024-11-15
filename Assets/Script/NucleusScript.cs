@@ -16,7 +16,6 @@ public class NucleusScript : MonoBehaviour
     void Start()
     {
         germ = GameObject.FindGameObjectWithTag("germ");
-        
     }
 
     // Update is called once per frame
@@ -26,6 +25,7 @@ public class NucleusScript : MonoBehaviour
         {
             Destroy(gameObject);
             germ.GetComponent<GermMovement>().NearestNucl = null;
+            germ.GetComponent<GermMovement>().FindNearestObject();
         }
         if (hit == true)
         {
