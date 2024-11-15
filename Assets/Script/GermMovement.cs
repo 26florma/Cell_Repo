@@ -34,7 +34,7 @@ public class GermMovement : MonoBehaviour
                 transform.Translate( lookDirection * Time.deltaTime * movementSpeed, Space.World);   
           }  
     }
-    Void FindNearestObject()
+    public Void FindNearestObject()
     {
      //calculates the nearest objects distance from the germ
         AllObjects = GameObject.FindGameObjectsWithTag("Nucl");
