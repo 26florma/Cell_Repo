@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditor.UIElements;
 using UnityEngine;
 
 public class NucleusScript : MonoBehaviour
@@ -21,7 +20,7 @@ public class NucleusScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      if(attackingGerm != null && attackingGerm.Count > 0)
+      if(attackingGerm.Count > 0)
       {
            foreach(GameObject germ in attackingGerm)
           {
@@ -36,17 +35,18 @@ public class NucleusScript : MonoBehaviour
 
         if(NuclHP <= 0)
         {
-             Destroy(gameObject);
+             
              if(attackingGerm.Count > 0)
              {
                 GameObject AliveGerms = attackingGerm[0];
                 if(AliveGerms != null)
                 {
-                germ.GetComponent<GermMovement>().NearestNucl = null;
-                germ.GetComponent<GermMovement>().FindNearestObject();
+                AliveGerms.GetComponent<GermMovement>().NearestNucl = null;
+                AliveGerms.GetComponent<GermMovement>().FindNearestObject();
                 }
              }
-        }
+          Destroy(gameObject);
+         }
 
      }
     //detection for hit
@@ -65,7 +65,10 @@ public class NucleusScript : MonoBehaviour
     {
      if(collision.gameObject.CompareTag("germ"))
      {
-              attackingGerm.Remove(collision.gameObject);
+            if(attackingGerm.Contains(collision.gameObject))
+            {
+             attackingGerm.Remove(collision.gameObject);
+            }
      }
     }
 }
