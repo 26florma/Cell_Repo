@@ -11,20 +11,25 @@ public class PlayerMomentScript : MonoBehaviour
     public int stemCellBar = 5;
     public int DNA;
 
+    public GameObject borderScript;
+
     private int stemCellLimit;
     private bool collisionWithGerm;
     // Start is called before the first frame update
     void Start()
     {
         germ = GameObject.FindGameObjectWithTag("germ");
+        borderScript = GameObject.FindGameObjectWithTag("border");
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(borderScript.GetComponent<GameBorderScript>().outOfBounds = false)
+        {
         Vector2 mousePos =Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.position = mousePos;
-        
+        }
         if (Input.GetKeyDown(KeyCode.Mouse0) && collisionWithGerm)
         {
             Debug.Log("Hit Detected");
