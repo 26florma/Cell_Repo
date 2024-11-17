@@ -11,7 +11,7 @@ public class GameBorderScript : MonoBehaviour
      public GameObject corner3;
      public GameObject Origin;   
      public GameObject Drone;
-     
+     public bool outOfBounds = false;
 
     // Start is called before the first frame update
     void Start()
@@ -31,8 +31,9 @@ public class GameBorderScript : MonoBehaviour
                 Vector2 Newposition = Drone.transform.position;
                 Newposition.y = corner1.transform.position.y;
                 Drone.transform.position = Newposition;
-                Debug.Log("detected y");
-
+                 outOfBounds = true;
+                 Debug.Log("detected y");
+                 
             }
 
         }
