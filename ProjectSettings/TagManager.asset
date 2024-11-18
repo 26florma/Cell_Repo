@@ -7,6 +7,7 @@ TagManager:
   - Germ
   - germ
   - Nucl
+  - border
   layers:
   - Default
   - TransparentFX

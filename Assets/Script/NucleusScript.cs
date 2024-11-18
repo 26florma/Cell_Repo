@@ -7,7 +7,7 @@ public class NucleusScript : MonoBehaviour
 {
     public int NuclHP = 20;
     public List<GameObject> attackingGerm = new List<GameObject>();
-    private bool hit = false;
+    
     
     private GameObject germ;
     
@@ -27,7 +27,7 @@ public class NucleusScript : MonoBehaviour
             if(germ != null)
             {
               GermMovement germMovement = germ.GetComponent<GermMovement>();
-              NuclHP -=germMovement.GermD;
+              NuclHP -=germMovement.germD;
             }
           } 
        
