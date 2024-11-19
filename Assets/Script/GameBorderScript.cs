@@ -31,11 +31,53 @@ public class GameBorderScript : MonoBehaviour
                 Vector2 Newposition = Drone.transform.position;
                 Newposition.y = corner1.transform.position.y;
                 Drone.transform.position = Newposition;
-                 outOfBounds = false;
-                 Debug.Log("detected y");
-                 
+                outOfBounds = false;
+                Debug.Log("detected y");
             }
-
+            if (Drone.transform.position.y < corner1.transform.position.y && outOfBounds = false)
+            {
+                outOfBounds = true;
+                Debug.Log("In bounds");
+            }
+            if (Drone.transform.position.x > corner1.transform.position.x)
+            {
+                Vector2 Newposition = Drone.transform.position;
+                Newposition.x = corner1.transform.position.x;
+                Drone.transform.position = Newposition;
+                outOfBounds = false;
+                Debug.Log("detected x");
+            }
+            if (Drone.transform.position.x < corner1.transform.position.y && outOfBounds = false)
+            {
+                outOfBounds = true;
+                Debug.Log("In bounds");
+            }
+            if (Drone.transform.position.y < corner2.transform.position.y)
+            {
+                Vector2 Newposition = Drone.transform.position;
+                Newposition.y = corner2.transform.position.y;
+                Drone.transform.position = Newposition;
+                outOfBounds = false;
+                Debug.Log("detected y");
+            }
+            if (Drone.transform.position.y > corner2.transform.position.y && outOfBounds = false)
+            {
+                outOfBounds = true;
+                Debug.Log("In bounds");
+            }
+            if (Drone.transform.position.x > corner3.transform.position.x)
+            {
+                Vector2 Newposition = Drone.transform.position;
+                Newposition.x = corner3.transform.position.x;
+                Drone.transform.position = Newposition;
+                outOfBounds = false;
+                Debug.Log("detected x");
+            }
+            if (Drone.transform.position.x < corner3.transform.position.x && outOfBounds = false)
+            {
+                outOfBounds = true;
+                Debug.Log("In bounds");
+            }
         }
     }
 }
