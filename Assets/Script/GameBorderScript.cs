@@ -25,55 +25,41 @@ public class GameBorderScript : MonoBehaviour
         //tests to see if all objects are assigned
         if (Drone != null && corner1 != null && corner2 != null && corner3 != null && Origin != null)
         {
+            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             //checks to see if the player is in the bounds
-            if (Drone.transform.position.y > corner1.transform.position.y)
+            if (mousePos.y > corner1.transform.position.y)
             {
                 Vector2 Newposition = Drone.transform.position;
-                Newposition.y = corner1.transform.position.y;
+                Newposition.y = corner1.transform.position.y -1;
                 Drone.transform.position = Newposition;
                 outOfBounds = false;
-                Debug.Log("detected y");
-            }
-            if (Drone.transform.position.y < corner1.transform.position.y && outOfBounds = false)
-            {
-                outOfBounds = true;
-                Debug.Log("In bounds");
-            }
-            if (Drone.transform.position.x > corner1.transform.position.x)
+                Debug.Log("detected y1");
+            }           
+            if (mousePos.x > corner1.transform.position.x)
             {
                 Vector2 Newposition = Drone.transform.position;
-                Newposition.x = corner1.transform.position.x;
+                Newposition.x = corner1.transform.position.x -1;
                 Drone.transform.position = Newposition;
                 outOfBounds = false;
-                Debug.Log("detected x");
+                Debug.Log("detected x1");
             }
-            if (Drone.transform.position.x < corner1.transform.position.y && outOfBounds = false)
-            {
-                outOfBounds = true;
-                Debug.Log("In bounds");
-            }
-            if (Drone.transform.position.y < corner2.transform.position.y)
+            if (mousePos.y < corner2.transform.position.y)
             {
                 Vector2 Newposition = Drone.transform.position;
-                Newposition.y = corner2.transform.position.y;
+                Newposition.y = corner2.transform.position.y +1;
                 Drone.transform.position = Newposition;
                 outOfBounds = false;
-                Debug.Log("detected y");
+                Debug.Log("detected y2");
             }
-            if (Drone.transform.position.y > corner2.transform.position.y && outOfBounds = false)
-            {
-                outOfBounds = true;
-                Debug.Log("In bounds");
-            }
-            if (Drone.transform.position.x > corner3.transform.position.x)
+            if (mousePos.x < corner3.transform.position.x)
             {
                 Vector2 Newposition = Drone.transform.position;
-                Newposition.x = corner3.transform.position.x;
+                Newposition.x = corner1.transform.position.x -1;
                 Drone.transform.position = Newposition;
                 outOfBounds = false;
-                Debug.Log("detected x");
+                Debug.Log("detected x3");
             }
-            if (Drone.transform.position.x < corner3.transform.position.x && outOfBounds = false)
+            if (mousePos.y < corner1.transform.position.y && mousePos.x > corner3.transform.position.x && mousePos.y > corner2.transform.position.y && mousePos.x < corner1.transform.position.y && outOfBounds == false)
             {
                 outOfBounds = true;
                 Debug.Log("In bounds");
