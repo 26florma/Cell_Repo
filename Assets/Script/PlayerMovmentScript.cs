@@ -27,7 +27,7 @@ public class PlayerMomentScript : MonoBehaviour
     {
         if(borderScript.GetComponent<GameBorderScript>().outOfBounds == true)
         {
-        Vector2 mousePos =Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.position = mousePos;
         }
         if (Input.GetKeyDown(KeyCode.Mouse0) && collisionWithGerm)
