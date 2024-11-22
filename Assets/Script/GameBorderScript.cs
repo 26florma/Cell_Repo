@@ -33,7 +33,7 @@ public class GameBorderScript : MonoBehaviour
                 Newposition.y = corner1.transform.position.y -1;
                 Drone.transform.position = Newposition;
                 outOfBounds = false;
-                Debug.Log("detected y1");
+                
             }           
             if (mousePos.x > corner1.transform.position.x)
             {
@@ -41,7 +41,7 @@ public class GameBorderScript : MonoBehaviour
                 Newposition.x = corner1.transform.position.x -1;
                 Drone.transform.position = Newposition;
                 outOfBounds = false;
-                Debug.Log("detected x1");
+                
             }
             if (mousePos.y < corner2.transform.position.y)
             {
@@ -49,7 +49,7 @@ public class GameBorderScript : MonoBehaviour
                 Newposition.y = corner2.transform.position.y +1;
                 Drone.transform.position = Newposition;
                 outOfBounds = false;
-                Debug.Log("detected y2");
+                
             }
             if (mousePos.x < corner3.transform.position.x)
             {
@@ -57,12 +57,12 @@ public class GameBorderScript : MonoBehaviour
                 Newposition.x = corner1.transform.position.x -1;
                 Drone.transform.position = Newposition;
                 outOfBounds = false;
-                Debug.Log("detected x3");
+                
             }
             if (mousePos.y < corner1.transform.position.y && mousePos.x > corner3.transform.position.x && mousePos.y > corner2.transform.position.y && mousePos.x < corner1.transform.position.y && outOfBounds == false)
             {
                 outOfBounds = true;
-                Debug.Log("In bounds");
+                
             }
         }
     }

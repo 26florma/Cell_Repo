@@ -31,7 +31,8 @@ public class GermMovement : MonoBehaviour
           if(NearestNucl!= null)
           {
                 Vector3 lookDirection = (NearestNucl.transform.position - transform.position).normalized;
-                transform.Translate( lookDirection * Time.deltaTime * movementSpeed, Space.World);   
+                transform.Translate( lookDirection * Time.deltaTime * movementSpeed, Space.World);
+                Debug.Log("Germ is moving");
           }  
     }
     public void FindNearestObject()
@@ -54,7 +55,8 @@ public class GermMovement : MonoBehaviour
              {
               nearestDistance = distance;
               NearestNucl = AllObjects[i];
-                        
+
+              Debug.Log("FindNearestObject is running");
              }
            }
          }
