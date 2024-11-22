@@ -8,13 +8,12 @@ public class NucleusScript : MonoBehaviour
     public int NuclHP = 20;
     public List<GameObject> attackingGerm = new List<GameObject>();
     
-    
     private GameObject germ;
     
     // Start is called before the first frame update
     void Start()
     {
-       
+     
     }
 
     // Update is called once per frame
@@ -43,6 +42,8 @@ public class NucleusScript : MonoBehaviour
                 {
                 AliveGerms.GetComponent<GermMovement>().NearestNucl = null;
                 AliveGerms.GetComponent<GermMovement>().FindNearestObject();
+                List = AliveGerms.GetComponent<GermMovement>().AllObjects;
+                List.remove(GameObject)
                 }
              }
           Destroy(gameObject);
