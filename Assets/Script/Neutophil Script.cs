@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class NeutophilScript : MonoBehaviour
 {
-    public int neutophilHP = 10;
-    public int neutophilD = 2;
-    public float neutophilSpeed = 2;
+    public int neutrophilHP = 10;
+    public int neutrophilD = 2;
+    public float neutrophilSpeed = 2;
     public float nearestDistance = 100000;
     public float distance;
     public bool onGerm = false;
@@ -25,9 +25,9 @@ public class NeutophilScript : MonoBehaviour
     {
     if(nearestGerm != null)
         {
-        Vector3 lookdirection = (NearestGerm.transform.postition - transform.postition).normalize;
-        transform.Translate(lookDirection * Time.delta.Time * neutophilSpeed, Space.World).normalize;
-        NeutophilAttacks();
+        Vector3 lookDirection = (NearestGerm.transform.position - transform.position).normalized;
+        transform.Translate(lookDirection * Time.deltaTime * neutrophilSpeed, Space.World);
+        NeutrophilAttacks(); 
         }
     }
     public void FindNearestGerm()
@@ -40,28 +40,32 @@ public class NeutophilScript : MonoBehaviour
             {
                 if(AllGerms[i] != null)
                 {
-                vector3 targetGermPos = AllGerms[i].transform.position;
+                Vector3 targetGermPos = AllGerms[i].transform.position;
                 distance = Vector3.Distance(transform.position,targetGermPos);
-                    if(distance < neartestDistance)
+                    if(distance < nearestDistance)
                     {
-                    neaestDistance = distance;
+                    nearestDistance = distance;
                     NearestGerm = AllGerms[i];
                     }
                 }
             }
         }
+        else
+        {
+        NearestGerm = null;
+        }
     }
-    public void NeutophilAttacks()
+    public void NeutrophilAttacks()
     {
     //phagocytosis
     if(onGerm == true)
     {
-    GermMovement germMovement = collision.gameObject.GetComponent<GermMovement>();
-    GermMovement.germHP -= neutophilD;
+    GermMovement germMovement = NearestGerm.gameObject.GetComponent<GermMovement>();
+    germMovement.germHP -= neutrophilD;
         if(GermMovement.germHP <= 0)
         {
         onGerm = false;
-        Destroy(collision.gameObject);
+        Destroy(NearestGerm);
         NearestGerm = null;
         FindNearestGerm();
         }
