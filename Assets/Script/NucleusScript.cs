@@ -18,28 +18,14 @@ public class NucleusScript : MonoBehaviour
      
     }
 
-    // Update is called once per frame
     void Update()
     {
-      if(attackingGerm.Count > 0)
-      {
-           foreach(GameObject germ in attackingGerm)
-           {
-            if(germ != null)
-            {
-              GermMovement germMovement = germ.GetComponent<GermMovement>();
-              NuclHP -=germMovement.germD;
-            }
-           } 
-       
-      }
-
         if(NuclHP <= 0)
         {
             Debug.Log("DeadNucl is Running");
              if(attackingGerm.Count > 0)
              {
-                GameObject AliveGerms = attackingGerm[0];
+                GameObject AliveGerms = attackingGerm[i];
                 if(AliveGerms != null)
                 {
                 
@@ -52,11 +38,30 @@ public class NucleusScript : MonoBehaviour
                         Debug.Log("Nucl is Dead");
                   
                     }
+                    else
+                    {
+                        Debug.Log("Nucl is Dead didn't work")
+                    }
                 }
              }
-         
         }
-
+     }
+     IEnumerator DamageDelay()
+     {
+     GermMovement germMovement = germ.GetComponent<GermMovement>();
+     yeild retrun new WaitForSeconds(germMovement.germAttackSpeed)
+     if(attackingGerm.Count > 0)
+      {
+           foreach(GameObject germ in attackingGerm)
+           {
+            if(germ != null)
+            {
+              NuclHP -=germMovement.germD;
+            }
+           } 
+      }
+     
+     
      }
     //detection for hit
     void OnTriggerEnter2D(Collider2D collision)

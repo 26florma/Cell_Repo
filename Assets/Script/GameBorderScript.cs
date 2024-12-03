@@ -11,7 +11,7 @@ public class GameBorderScript : MonoBehaviour
      public GameObject corner3;
      public GameObject Origin;   
      public GameObject Drone;
-     public bool outOfBounds = false;
+     public bool inBounds = true;
 
     // Start is called before the first frame update
     void Start()
@@ -26,13 +26,13 @@ public class GameBorderScript : MonoBehaviour
         if (Drone != null && corner1 != null && corner2 != null && corner3 != null && Origin != null)
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            //checks to see if the player is in the bounds
+            //checks to see if the player is out of bounds
             if (mousePos.y > corner1.transform.position.y)
             {
                 Vector2 Newposition = Drone.transform.position;
                 Newposition.y = corner1.transform.position.y -1;
                 Drone.transform.position = Newposition;
-                outOfBounds = true;
+                outOfBounds = false;
                 
             }           
             if (mousePos.x > corner1.transform.position.x)
@@ -40,7 +40,7 @@ public class GameBorderScript : MonoBehaviour
                 Vector2 Newposition = Drone.transform.position;
                 Newposition.x = corner1.transform.position.x -1;
                 Drone.transform.position = Newposition;
-                outOfBounds = true;
+                outOfBounds = false;
                 
             }
             if (mousePos.y < corner2.transform.position.y)
@@ -48,20 +48,21 @@ public class GameBorderScript : MonoBehaviour
                 Vector2 Newposition = Drone.transform.position;
                 Newposition.y = corner2.transform.position.y +1;
                 Drone.transform.position = Newposition;
-                outOfBounds = true;
+                outOfBounds = false;
                 
             }
             if (mousePos.x < corner3.transform.position.x)
             {
                 Vector2 Newposition = Drone.transform.position;
-                Newposition.x = corner1.transform.position.x -1;
+                Newposition.x = corner3.transform.position.x -1;
                 Drone.transform.position = Newposition;
-                outOfBounds = true;
+                outOfBounds = false;
                 
             }
-            if (mousePos.y < corner1.transform.position.y && mousePos.x > corner3.transform.position.x && mousePos.y > corner2.transform.position.y && mousePos.x < corner1.transform.position.y && outOfBounds == false)
+            //checks to see if player is in bounds
+            if (mousePos.y < corner1.transform.position.y && mousePos.x > corner3.transform.position.x && mousePos.y > corner2.transform.position.y && mousePos.x < corner1.transform.position.y && inBounds == false)
             {
-                outOfBounds = false;
+                outOfBounds = true;
                 
             }
         }

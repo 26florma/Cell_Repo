@@ -12,6 +12,7 @@ public class GermMovement : MonoBehaviour
     public float nearestDistance = 10000;
     public int germHP = 3;
     public int germD = 1;
+    public int germAttackSpeed = 10;
     public GameObject[] AllObjects; 
     public GameObject NearestNucl;
     public GameObject nucleus;
