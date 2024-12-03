@@ -32,7 +32,7 @@ public class GameBorderScript : MonoBehaviour
                 Vector2 Newposition = Drone.transform.position;
                 Newposition.y = corner1.transform.position.y -1;
                 Drone.transform.position = Newposition;
-                outOfBounds = false;
+                inBounds = false;
                 
             }           
             if (mousePos.x > corner1.transform.position.x)
@@ -40,7 +40,7 @@ public class GameBorderScript : MonoBehaviour
                 Vector2 Newposition = Drone.transform.position;
                 Newposition.x = corner1.transform.position.x -1;
                 Drone.transform.position = Newposition;
-                outOfBounds = false;
+                inBounds = false;
                 
             }
             if (mousePos.y < corner2.transform.position.y)
@@ -48,7 +48,7 @@ public class GameBorderScript : MonoBehaviour
                 Vector2 Newposition = Drone.transform.position;
                 Newposition.y = corner2.transform.position.y +1;
                 Drone.transform.position = Newposition;
-                outOfBounds = false;
+                inBounds = false;
                 
             }
             if (mousePos.x < corner3.transform.position.x)
@@ -56,13 +56,13 @@ public class GameBorderScript : MonoBehaviour
                 Vector2 Newposition = Drone.transform.position;
                 Newposition.x = corner3.transform.position.x -1;
                 Drone.transform.position = Newposition;
-                outOfBounds = false;
+                inBounds = false;
                 
             }
             //checks to see if player is in bounds
             if (mousePos.y < corner1.transform.position.y && mousePos.x > corner3.transform.position.x && mousePos.y > corner2.transform.position.y && mousePos.x < corner1.transform.position.y && inBounds == false)
             {
-                outOfBounds = true;
+                inBounds = true;
                 
             }
         }
