@@ -23,7 +23,7 @@ public class NeutophilScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    if(nearestGerm != null)
+    if(NearestGerm != null)
         {
         Vector3 lookDirection = (NearestGerm.transform.position - transform.position).normalized;
         transform.Translate(lookDirection * Time.deltaTime * neutrophilSpeed, Space.World);
@@ -62,7 +62,7 @@ public class NeutophilScript : MonoBehaviour
     {
     GermMovement germMovement = NearestGerm.gameObject.GetComponent<GermMovement>();
     germMovement.germHP -= neutrophilD;
-        if(GermMovement.germHP <= 0)
+        if(germMovement.germHP <= 0)
         {
         onGerm = false;
         Destroy(NearestGerm);

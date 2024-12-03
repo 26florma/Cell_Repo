@@ -25,7 +25,7 @@ public class PlayerMomentScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(borderScript.GetComponent<GameBorderScript>().outOfBounds == true)
+        if(borderScript.GetComponent<GameBorderScript>().outOfBounds == false)
         {
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.position = mousePos;

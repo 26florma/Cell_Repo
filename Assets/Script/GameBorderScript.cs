@@ -11,7 +11,7 @@ public class GameBorderScript : MonoBehaviour
      public GameObject corner3;
      public GameObject Origin;   
      public GameObject Drone;
-     public bool outOfBounds = true;
+     public bool outOfBounds = false;
 
     // Start is called before the first frame update
     void Start()
@@ -32,7 +32,7 @@ public class GameBorderScript : MonoBehaviour
                 Vector2 Newposition = Drone.transform.position;
                 Newposition.y = corner1.transform.position.y -1;
                 Drone.transform.position = Newposition;
-                outOfBounds = false;
+                outOfBounds = true;
                 
             }           
             if (mousePos.x > corner1.transform.position.x)
@@ -40,7 +40,7 @@ public class GameBorderScript : MonoBehaviour
                 Vector2 Newposition = Drone.transform.position;
                 Newposition.x = corner1.transform.position.x -1;
                 Drone.transform.position = Newposition;
-                outOfBounds = false;
+                outOfBounds = true;
                 
             }
             if (mousePos.y < corner2.transform.position.y)
@@ -48,7 +48,7 @@ public class GameBorderScript : MonoBehaviour
                 Vector2 Newposition = Drone.transform.position;
                 Newposition.y = corner2.transform.position.y +1;
                 Drone.transform.position = Newposition;
-                outOfBounds = false;
+                outOfBounds = true;
                 
             }
             if (mousePos.x < corner3.transform.position.x)
@@ -56,12 +56,12 @@ public class GameBorderScript : MonoBehaviour
                 Vector2 Newposition = Drone.transform.position;
                 Newposition.x = corner1.transform.position.x -1;
                 Drone.transform.position = Newposition;
-                outOfBounds = false;
+                outOfBounds = true;
                 
             }
             if (mousePos.y < corner1.transform.position.y && mousePos.x > corner3.transform.position.x && mousePos.y > corner2.transform.position.y && mousePos.x < corner1.transform.position.y && outOfBounds == false)
             {
-                outOfBounds = true;
+                outOfBounds = false;
                 
             }
         }
