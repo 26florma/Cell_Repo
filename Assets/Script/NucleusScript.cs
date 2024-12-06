@@ -15,7 +15,8 @@ public class NucleusScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-     
+
+
     }
 
     void Update()
@@ -25,7 +26,7 @@ public class NucleusScript : MonoBehaviour
             Debug.Log("DeadNucl is Running");
              if(attackingGerm.Count > 0)
              {
-                GameObject AliveGerms = attackingGerm[i];
+                GameObject AliveGerms = attackingGerm[0];
                 if(AliveGerms != null)
                 {
                 
@@ -40,7 +41,7 @@ public class NucleusScript : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("Nucl is Dead didn't work")
+                        Debug.Log("Nucl is Dead didn't work");
                     }
                 }
              }
@@ -48,20 +49,25 @@ public class NucleusScript : MonoBehaviour
      }
      IEnumerator DamageDelay()
      {
-     GermMovement germMovement = germ.GetComponent<GermMovement>();
-     yeild retrun new WaitForSeconds(germMovement.germAttackSpeed)
-     if(attackingGerm.Count > 0)
-      {
-           foreach(GameObject germ in attackingGerm)
-           {
-            if(germ != null)
+        GermMovement germMovement = germ.GetComponent<GermMovement>();
+        yield return new WaitForSeconds(germMovement.germAttackSpeed);
+        DealDamageToNucl();
+     
+     }
+
+     public void DealDamageToNucl()
+     {
+        GermMovement germMovement = germ.GetComponent<GermMovement>();
+        if (attackingGerm.Count > 0)
+        {
+            foreach (GameObject germ in attackingGerm)
             {
-              NuclHP -=germMovement.germD;
+                if (germ != null)
+                {
+                    NuclHP -= germMovement.germD;
+                }
             }
-           } 
-      }
-     
-     
+        }
      }
     //detection for hit
     void OnTriggerEnter2D(Collider2D collision)
