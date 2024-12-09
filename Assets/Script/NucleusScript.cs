@@ -16,7 +16,6 @@ public class NucleusScript : MonoBehaviour
     void Start()
     {
 
-
     }
 
     void Update()
@@ -43,10 +42,13 @@ public class NucleusScript : MonoBehaviour
                     {
                         Debug.Log("Nucl is Dead didn't work");
                     }
+                    StartCoroutine(DamageDelay());
                 }
+
              }
         }
-     }
+        
+    }
      IEnumerator DamageDelay()
      {
         GermMovement germMovement = germ.GetComponent<GermMovement>();
@@ -77,6 +79,7 @@ public class NucleusScript : MonoBehaviour
            if(!attackingGerm.Contains(collision.gameObject))
            {
               attackingGerm.Add(collision.gameObject);
+                Debug.Log("1");
            }
 
      }
