@@ -9,7 +9,6 @@ public class NucleusScript : MonoBehaviour
     public int NuclHP = 20;
     public List<GameObject> attackingGerm = new List<GameObject>();
 
-   
     private GameObject germ;
 
     // At the first frame runs the DamageDelay Coroutine
@@ -32,10 +31,10 @@ public class NucleusScript : MonoBehaviour
                 
                 AliveGerms.GetComponent<GermMovement>().NearestNucl = null;
                 AliveGerms.GetComponent<GermMovement>().FindNearestObject();
-                
-                    if(AliveGerms.GetComponent<GermMovement>().NearestNucl == null)
+                Destroy(gameObject);
+                    if (AliveGerms.GetComponent<GermMovement>().NearestNucl == null)
                     {
-                        Destroy(gameObject);
+                        
                         Debug.Log("Nucl is Dead");
                   
                     }
@@ -57,6 +56,7 @@ public class NucleusScript : MonoBehaviour
          {
            yield return new WaitForSeconds(germMovement.germAttackSpeed);
            DealDamageToNucl();
+            Debug.Log("Ran Damage cooldown");
          }
      }
 

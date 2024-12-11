@@ -61,7 +61,8 @@ public class NeutophilScript : MonoBehaviour
     }
     IEnumerator NeutrophilDamageDelay()
     {
-     yeild return new WaitForSeconds(neutrophilAttackSpeed); 
+     yield return new WaitForSeconds(neutrophilAttackSpeed);
+     
      NeutrophilAttacks();
     }
     
