@@ -7,6 +7,7 @@ using UnityEngine;
 public class NucleusScript : MonoBehaviour
 {
     public int NuclHP = 20;
+    public bool germIsAttacking = false;
     public List<GameObject> attackingGerm = new List<GameObject>();
 
     private GameObject germ;
@@ -14,7 +15,7 @@ public class NucleusScript : MonoBehaviour
     // At the first frame runs the DamageDelay Coroutine
     void Start()
     {
-      StartCoroutine(DamageDelay());
+      
     }
 
     void Update()
@@ -42,12 +43,13 @@ public class NucleusScript : MonoBehaviour
                     {
                         Debug.Log("Nucl is Dead didn't work");
                     }
-           
                 }
-
              }
         }
-        
+        if(germIsAttacking)
+        {
+         StartCoroutine(DamageDelay());
+        }
     }
      IEnumerator DamageDelay()
      {
@@ -56,7 +58,7 @@ public class NucleusScript : MonoBehaviour
          {
            yield return new WaitForSeconds(germMovement.germAttackSpeed);
            DealDamageToNucl();
-            Debug.Log("Ran Damage cooldown");
+           Debug.Log("Ran Damage cooldown");
          }
      }
 
@@ -67,7 +69,7 @@ public class NucleusScript : MonoBehaviour
         {
             foreach (GameObject germ in attackingGerm)
             {
-                if (germ != null)
+                if (germ != null && germIsAttacking)
                 {
                     NuclHP -= germMovement.germD;
                 }
@@ -82,6 +84,7 @@ public class NucleusScript : MonoBehaviour
            if(!attackingGerm.Contains(collision.gameObject))
            {
               attackingGerm.Add(collision.gameObject);
+              germIsAttacking = true
            }
      }
     }
@@ -92,6 +95,7 @@ public class NucleusScript : MonoBehaviour
             if(attackingGerm.Contains(collision.gameObject))
             {
              attackingGerm.Remove(collision.gameObject);
+             germIsAttacking = false
             }
      }
     }
