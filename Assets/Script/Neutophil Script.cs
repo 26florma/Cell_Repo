@@ -6,6 +6,7 @@ public class NeutophilScript : MonoBehaviour
 {
     public int neutrophilHP = 10;
     public int neutrophilD = 2;
+    public int neutrophilAttackSpeed = 5;
     public float neutrophilSpeed = 2;
     public float nearestDistance = 100000;
     public float distance;
@@ -27,7 +28,10 @@ public class NeutophilScript : MonoBehaviour
         {
         Vector3 lookDirection = (NearestGerm.transform.position - transform.position).normalized;
         transform.Translate(lookDirection * Time.deltaTime * neutrophilSpeed, Space.World);
-        NeutrophilAttacks(); 
+        if(onGerm == true)
+        {
+        StartCoroutine(NeutrophilDamageDelay());
+        }
         }
     }
     public void FindNearestGerm()
@@ -55,6 +59,12 @@ public class NeutophilScript : MonoBehaviour
         NearestGerm = null;
         }
     }
+    IEnumerator NeutrophilDamageDelay()
+    {
+     yeild return new WaitForSeconds(neutrophilAttackSpeed); 
+     NeutrophilAttacks();
+    }
+    
     public void NeutrophilAttacks()
     {
     //phagocytosis
