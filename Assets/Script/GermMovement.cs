@@ -13,6 +13,7 @@ public class GermMovement : MonoBehaviour
     public int germHP = 3;
     public int germD = 1;
     public int germAttackSpeed = 10;
+    public bool stunned = false;
     public GameObject[] AllObjects; 
     public GameObject NearestNucl;
     public GameObject nucleus;
@@ -28,14 +29,18 @@ public class GermMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-          //moves germ in the direction of nearest object
-          if(NearestNucl!= null)
+         GermMovement();
+    }
+    public void GermMovement()
+    }
+        //moves germ in the direction of nearest object
+        if(NearestNucl!= null && stunned == false)
           {
                 Vector3 lookDirection = (NearestNucl.transform.position - transform.position).normalized;
                 transform.Translate( lookDirection * Time.deltaTime * movementSpeed, Space.World);
                 Debug.Log("Germ is moving");
           }  
-    }
+    {
     public void FindNearestObject()
     {
         //calculates the nearest objects distance from the germ
