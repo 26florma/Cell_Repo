@@ -75,6 +75,7 @@ public class NeutophilScript : MonoBehaviour
     germMovement.germHP -= neutrophilD;
         if(germMovement.germHP <= 0)
         {
+        germMovement.stunned = true;
         onGerm = false;
         Destroy(NearestGerm);
         NearestGerm = null;
