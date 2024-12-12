@@ -42,7 +42,6 @@ public class PlayerMomentScript : MonoBehaviour
             stemCells =+ 1;
             DNA = 0;
         }
-        
     }
 
     void OnTriggerEnter2D(Collider2D collision)

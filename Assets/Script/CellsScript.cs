@@ -28,7 +28,7 @@ public class CellsScript : MonoBehaviour
     {
         if(GermObject.gameObject.CompareTag("germ"))
         {
-         breachByGerm = false
+         breachedByGerm = false;
         }
     }
 }

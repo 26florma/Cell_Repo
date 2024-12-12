@@ -10,12 +10,12 @@ public class NucleusScript : MonoBehaviour
     public bool germIsAttacking = false;
     public List<GameObject> attackingGerm = new List<GameObject>();
 
-    private GameObject germ;
+    public GameObject Germ;
 
     // At the first frame runs the DamageDelay Coroutine
     void Start()
     {
-      
+        
     }
 
     void Update()
@@ -29,37 +29,21 @@ public class NucleusScript : MonoBehaviour
                 GameObject AliveGerms = attackingGerm[0];
                 if(AliveGerms != null)
                 {
-                
                 AliveGerms.GetComponent<GermMovement>().NearestNucl = null;
                 AliveGerms.GetComponent<GermMovement>().FindNearestObject();
                 Destroy(gameObject);
-                    if (AliveGerms.GetComponent<GermMovement>().NearestNucl == null)
-                    {
-                        
-                        Debug.Log("Nucl is Dead");
-                  
-                    }
-                    else
-                    {
-                        Debug.Log("Nucl is Dead didn't work");
-                    }
                 }
              }
         }
         if(germIsAttacking)
         {
-         StartCoroutine(DamageDelay());
+            StartCoroutine(GermDamageDelay());
         }
     }
-     Void OnDestroy()
-    {
-    GermMovement germMovement = germ.GetComponent<GermMovement>();
-    germMovement.RemoveAllObjects(this);
-    }
-     IEnumerator DamageDelay()
+     IEnumerator GermDamageDelay()
      {
-         GermMovement germMovement = germ.GetComponent<GermMovement>();
-         while(attackingGerm.Count > 0)
+        GermMovement germMovement = Germ.GetComponent<GermMovement>();
+        while (attackingGerm.Count > 0)
          {
            yield return new WaitForSeconds(germMovement.germAttackSpeed);
            DealDamageToNucl();
@@ -69,7 +53,7 @@ public class NucleusScript : MonoBehaviour
 
      public void DealDamageToNucl()
      {
-        GermMovement germMovement = germ.GetComponent<GermMovement>();
+        GermMovement germMovement = Germ.GetComponent<GermMovement>();
         if (attackingGerm.Count > 0)
         {
             foreach (GameObject germ in attackingGerm)
@@ -89,7 +73,7 @@ public class NucleusScript : MonoBehaviour
            if(!attackingGerm.Contains(collision.gameObject))
            {
               attackingGerm.Add(collision.gameObject);
-              germIsAttacking = true
+                germIsAttacking = true;
            }
      }
     }
@@ -100,7 +84,7 @@ public class NucleusScript : MonoBehaviour
             if(attackingGerm.Contains(collision.gameObject))
             {
              attackingGerm.Remove(collision.gameObject);
-             germIsAttacking = false
+             germIsAttacking = false;
             }
      }
     }

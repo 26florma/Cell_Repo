@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -17,35 +18,43 @@ public class GermMovement : MonoBehaviour
     public GameObject[] AllObjects; 
     public GameObject NearestNucl;
     public GameObject nucleus;
-
+    
 
 
     // Start is called before the first frame update
     void Start()
     {
         FindNearestObject();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-         GermMovement();
+         GermMovementFunction();
+         if(NearestNucl == null)
+         {
+            AllObjects.AsReadOnlyCollection<GameObject>().Remove(NearestNucl);
+         }
+         if(germHP <= 0)
+         {
+            Destroy(gameObject);
+         }
     }
-    public void GermMovement()
+    public void GermMovementFunction()
+    {//moves germ in the direction of nearest object
+        if (NearestNucl != null && stunned == false)
+        {
+            Vector3 lookDirection = (NearestNucl.transform.position - transform.position).normalized;
+            transform.Translate(lookDirection * Time.deltaTime * movementSpeed, Space.World);
+            Debug.Log("Germ is moving");
+        }
     }
-        //moves germ in the direction of nearest object
-        if(NearestNucl!= null && stunned == false)
-          {
-                Vector3 lookDirection = (NearestNucl.transform.position - transform.position).normalized;
-                transform.Translate( lookDirection * Time.deltaTime * movementSpeed, Space.World);
-                Debug.Log("Germ is moving");
-          }  
-    {
     public void FindNearestObject()
     {
         //calculates the nearest objects distance from the germ
-        
-        AllObjects = GameObject.FindGameObjectsWithTag("Nucl");
+
+       AllObjects = GameObject.FindGameObjectsWithTag("Nucl");
         if (AllObjects.Length > 0)
         {
             nearestDistance = 10000f;
