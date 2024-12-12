@@ -51,6 +51,11 @@ public class NucleusScript : MonoBehaviour
          StartCoroutine(DamageDelay());
         }
     }
+     Void OnDestroy()
+    {
+    GermMovement germMovement = germ.GetComponent<GermMovement>();
+    germMovement.RemoveAllObjects(this);
+    }
      IEnumerator DamageDelay()
      {
          GermMovement germMovement = germ.GetComponent<GermMovement>();
