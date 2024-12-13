@@ -18,7 +18,7 @@ public class PlayerMomentScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        germ = GameObject.FindGameObjectWithTag("germ");
+        
         borderScript = GameObject.FindGameObjectWithTag("border");
     }
 
@@ -50,6 +50,7 @@ public class PlayerMomentScript : MonoBehaviour
     {
       if(collision.gameObject.CompareTag("germ"))
       {
+            germ = collision.GameObject;
             Debug.Log("collision detected");
             collisionWithGerm = true;
       }
