@@ -50,7 +50,7 @@ public class PlayerMomentScript : MonoBehaviour
     {
       if(collision.gameObject.CompareTag("germ"))
       {
-            germ = collision.GameObject;
+            germ = collision.gameObject;
             Debug.Log("collision detected");
             collisionWithGerm = true;
       }

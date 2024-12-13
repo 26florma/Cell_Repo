@@ -5,6 +5,7 @@ using UnityEngine;
 public class RhinovirusScript : MonoBehaviour
 {
     public GameObject Cell;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,9 +22,9 @@ public class RhinovirusScript : MonoBehaviour
     }
     public void OnTriggerEnter2D(Collider CellObject)
     {
-     If(CellObject.GameObject.CompareTag("Cell"))
+     if(CellObject.gameObject.CompareTag("Cell"))
      {
-     CellObject = Cell
+            Cell = CellObject.gameObject;
      }
     }
 }

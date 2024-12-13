@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -15,7 +16,7 @@ public class GermMovement : MonoBehaviour
     public int germD = 1;
     public int germAttackSpeed = 10;
     public bool stunned = false;
-    public List<GameObject> AllObjects new List<GameObject>(); 
+    public List<GameObject> AllObjects = new List<GameObject>(); 
     public GameObject NearestNucl;
     public GameObject Player;
 
@@ -25,7 +26,7 @@ public class GermMovement : MonoBehaviour
     {
         FindNearestObject();
         AllObjects = GameObject.FindGameObjectsWithTag("Nucl").ToList();
-        PlayerMovmentScript PlayerMovement = Player.GetComponent<PlayerMovmentScript>();
+        Player = GameObject.FindGameObjectsWithTag("Drone");
     }
 
     // Update is called once per frame
@@ -60,7 +61,7 @@ public class GermMovement : MonoBehaviour
     {
         //calculates the nearest objects distance from the germ
 
-       AllObjects = GameObject.FindGameObjectsWithTag("Nucl");
+       AllObjects = GameObject.FindGameObjectsWithTag("Nucl").ToList();
         if (AllObjects.Count > 0)
         {
             nearestDistance = 10000f;
@@ -87,8 +88,8 @@ public class GermMovement : MonoBehaviour
     {
     if(collision.gameObject.CompareTag("Nucl"))
     {
-    NucleusScript NuclScript = Nucleus.GetComponent<NucleusScript>();
-    collision.gameObject = Nucleus;
+            NucleusScript NuclScript = Nucleus.GetComponent<NucleusScript>();
+            Nucleus = collision.gameObject;
     }
     }
 }
