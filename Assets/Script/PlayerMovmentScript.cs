@@ -34,8 +34,10 @@ public class PlayerMomentScript : MonoBehaviour
         {
             Debug.Log("Hit Detected");
             DNA =+ 1;
-
+            if(germ !=null)
+            {
             germ.GetComponent<GermMovement>().germHP -= damage;
+            }
         }
         if (stemCellLimit == DNA)
         {
