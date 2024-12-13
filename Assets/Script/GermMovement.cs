@@ -15,30 +15,36 @@ public class GermMovement : MonoBehaviour
     public int germD = 1;
     public int germAttackSpeed = 10;
     public bool stunned = false;
-    public GameObject[] AllObjects; 
+    public List<GameObject> AllObjects new List<GameObject>(); 
     public GameObject NearestNucl;
-    public GameObject nucleus;
-    
+    public GameObject Player;
 
-
+    private GameObject Nucleus;
     // Start is called before the first frame update
     void Start()
     {
         FindNearestObject();
-        
+        AllObjects = GameObject.FindGameObjectsWithTag("Nucl").ToList();
+        PlayerMovmentScript PlayerMovement = Player.GetComponent<PlayerMovmentScript>();
     }
 
     // Update is called once per frame
     void Update()
     {
+         
          GermMovementFunction();
          if(NearestNucl == null)
          {
-            AllObjects.AsReadOnlyCollection<GameObject>().Remove(NearestNucl);
+            FindNearestObject();
          }
          if(germHP <= 0)
          {
             Destroy(gameObject);
+            PlayerMovement.TargetedGerm.Remove(this);
+               if(Nucleus != null)
+                {
+                 NuclScript.attackingGerm.Remove(this);
+                }
          }
     }
     public void GermMovementFunction()
@@ -55,11 +61,11 @@ public class GermMovement : MonoBehaviour
         //calculates the nearest objects distance from the germ
 
        AllObjects = GameObject.FindGameObjectsWithTag("Nucl");
-        if (AllObjects.Length > 0)
+        if (AllObjects.Count > 0)
         {
             nearestDistance = 10000f;
           
-          for (int i = 0; i < AllObjects.Length; i++)
+          for (int i = 0; i < AllObjects.Count; i++)
           {
            if (AllObjects[i] != null)
            {
@@ -77,5 +83,12 @@ public class GermMovement : MonoBehaviour
          }
         }
     }
-    
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+    if(collision.gameObject.CompareTag("Nucl"))
+    {
+    NucleusScript NuclScript = Nucleus.GetComponent<NucleusScript>();
+    collision.gameObject = Nucleus;
+    }
+    }
 }
