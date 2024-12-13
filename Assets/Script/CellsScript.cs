@@ -8,6 +8,8 @@ public class CellsScript : MonoBehaviour
     public bool breachedByGerm = false;
     public bool cellIsAlive = true
     public string deadActions;  
+
+    public GameObject Pathogen
     // Start is called before the first frame update
     void Start()
     {
@@ -21,10 +23,13 @@ public class CellsScript : MonoBehaviour
         Switch(deadActions)
         {
          case "InfectedByVirus":
-              Debug.Log("Infected");
+              if(Pathogen != null)
+              {
+              instantiate(Pathogen,transform.postion, transform.rotation);
+              }
               break;
          case "KilledByPathogen":
-              Debug.Log("Killed")
+              Destroy(gameObject);
               break;
          default:
               Debug.Log("Error")
@@ -37,6 +42,7 @@ public class CellsScript : MonoBehaviour
     {
         if(GermObject.gameObject.CompareTag("germ"))
         {
+         GermObject.gameObject = Pathogen;
          breachedByGerm = true;
         }
     }
