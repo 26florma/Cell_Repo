@@ -8,7 +8,6 @@ using UnityEngine.UIElements;
 
 public class GermMovement : MonoBehaviour
 {
-
     public float movementSpeed =10;
     public float distance;
     public float nearestDistance = 10000;
@@ -19,22 +18,36 @@ public class GermMovement : MonoBehaviour
     public List<GameObject> AllObjects = new List<GameObject>(); 
     public GameObject NearestNucl;
     public GameObject Player;
+    public GameObject Goal;
 
+    private int aggression = 10;
+    private bool moveTowardsGoal = true;
     private GameObject Nucleus;
     // Start is called before the first frame update
     void Start()
     {
+        aggression = random.range(0, aggression);
+        if(aggression == 10)
+        {
+        moveTowardsGoal = false;
         FindNearestObject();
+        }
+        else
+        {
+        moveTowardsGoal = true;
+        }
         AllObjects = GameObject.FindGameObjectsWithTag("Nucl").ToList();
-        Player = GameObject.FindGameObjectsWithTag("Drone");
+        Player = GameObject.FindGameObjectWithTag("Drone");
+        Goal = GameObject.FindGameObjectWithTag("Goal");
     }
-
     // Update is called once per frame
     void Update()
     {
-         
+         if(stunned == false)
+         {
          GermMovementFunction();
-         if(NearestNucl == null)
+         }
+         if(NearestNucl == null && moveTowardsGoal == false)
          {
             FindNearestObject();
          }
@@ -49,18 +62,22 @@ public class GermMovement : MonoBehaviour
          }
     }
     public void GermMovementFunction()
-    {//moves germ in the direction of nearest object
-        if (NearestNucl != null && stunned == false)
+    {//moves germ in the direction of nearest object or moves towards goal
+        if (NearestNucl != null && moveTowardsGoal == false)
         {
             Vector3 lookDirection = (NearestNucl.transform.position - transform.position).normalized;
             transform.Translate(lookDirection * Time.deltaTime * movementSpeed, Space.World);
-            Debug.Log("Germ is moving");
+            Debug.Log("Germ is moving to cell");
+        }
+        else
+        {
+            Vector3 lookDirection = (Goal.transform.position - transform.position).normalized;
+            transform.Translate(lookDirection * Time.deltaTime * movementSpeed, Space.World);
+            Debug.Log("Germ is moving to goal");
         }
     }
     public void FindNearestObject()
-    {
-        //calculates the nearest objects distance from the germ
-
+    {//calculates the nearest objects distance from the germ
        AllObjects = GameObject.FindGameObjectsWithTag("Nucl").ToList();
         if (AllObjects.Count > 0)
         {
@@ -86,10 +103,11 @@ public class GermMovement : MonoBehaviour
     }
     public void OnTriggerEnter2D(Collider2D collision)
     {
-    if(collision.gameObject.CompareTag("Nucl"))
+    if(collision.gameObject.CompareTag("Nucl") || collision.object.compareTag("Goal"))
     {
-            NucleusScript NuclScript = Nucleus.GetComponent<NucleusScript>();
             Nucleus = collision.gameObject;
+            NucleusScript NuclScript = Nucleus.GetComponent<NucleusScript>();
+            stunned = true;
     }
     }
 }
