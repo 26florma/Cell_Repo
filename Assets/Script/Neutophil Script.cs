@@ -6,7 +6,7 @@ public class NeutophilScript : MonoBehaviour
 {
     public int neutrophilHP = 10;
     public int neutrophilD = 2;
-    public int neutrophilAttackSpeed = 5;
+    public int phagocytosisAttackSpeed = 5;
     public float neutrophilSpeed = 2;
     public float nearestDistance = 100000;
     public float distance;
@@ -30,7 +30,7 @@ public class NeutophilScript : MonoBehaviour
         transform.Translate(lookDirection * Time.deltaTime * neutrophilSpeed, Space.World);
         if(onGerm == true)
         {
-        StartCoroutine(NeutrophilDamageDelay());
+        StartCoroutine(Phagocytosis());
         }
         }
     }
@@ -59,33 +59,34 @@ public class NeutophilScript : MonoBehaviour
         NearestGerm = null;
         }
     }
-    IEnumerator NeutrophilDamageDelay()
+    IEnumerator Phagocytosis()
     {
-     yield return new WaitForSeconds(neutrophilAttackSpeed);
-     
-     NeutrophilAttacks();
-    }
-    
-    public void NeutrophilAttacks()
-    {
+    yield return new WaitForSeconds(phagocytosisAttackSpeed);
     //phagocytosis
     if(onGerm == true)
     {
     GermMovement germMovement = NearestGerm.gameObject.GetComponent<GermMovement>();
     germMovement.germHP -= neutrophilD;
+    germMovement.stunned = true;
         if(germMovement.germHP <= 0)
         {
-        germMovement.stunned = true;
+        NearestGerm.stunned = false;
         onGerm = false;
         Destroy(NearestGerm);
         NearestGerm = null;
         FindNearestGerm();
         }
     }
+    }
+    IEnumerator Toxin()
+    public void NeutrophilAttacks()
+    {
+     yield return new WaitForSeconds(toxinAttackSpeed);
+    if(Level >= 2)
+    {
     
     
-    
-    
+    }
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
