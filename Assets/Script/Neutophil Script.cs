@@ -19,6 +19,7 @@ public class NeutophilScript : MonoBehaviour
     public GameObject[] AllGerms;
     public GameObject NearestGerm;
     public GameObject germ;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,8 +33,6 @@ public class NeutophilScript : MonoBehaviour
         {
         Vector3 lookDirection = (NearestGerm.transform.position - transform.position).normalized;
         transform.Translate(lookDirection * Time.deltaTime * neutrophilSpeed, Space.World);
-        if(onGerm == true)
-        {
         switch(chosen attacks)
         case "toxin":
           StartCoroutine(Toxin());
@@ -44,7 +43,6 @@ public class NeutophilScript : MonoBehaviour
         default:
           StartCoroutine(Phagocytosis());
           break;
-        }
         }
     }
     public void FindNearestGerm()
@@ -93,11 +91,14 @@ public class NeutophilScript : MonoBehaviour
     }
     IEnumerator Toxin()
     {
-     yield return new WaitForSeconds(toxinAttackSpeed);
     //toxicSpray
     if(level >= 2)
     {
-    Debug.Log("finish later");
+        while(lookDirection <= 3)
+        {
+        yield return new WaitForSeconds(toxinAttackSpeed);
+        instantiate(toxinPrefab,transform.positition,lookDirection)
+        }
     }
     }
     IEnumerator Nets()
