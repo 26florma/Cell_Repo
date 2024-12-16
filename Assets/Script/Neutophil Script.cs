@@ -14,6 +14,7 @@ public class NeutophilScript : MonoBehaviour
     public float nearestDistance = 100000;
     public float distance;
     public bool onGerm = false;
+    public bool stunnd = false;
     public string chosenAttacks;
     
     public GameObject[] AllGerms;
@@ -30,10 +31,14 @@ public class NeutophilScript : MonoBehaviour
     void Update()
     {
     if(NearestGerm != null)
-        {
-        Vector3 lookDirection = (NearestGerm.transform.position - transform.position).normalized;
-        transform.Translate(lookDirection * Time.deltaTime * neutrophilSpeed, Space.World);
+    {
+            if(stunned = false)
+            {
+            Vector3 lookDirection = (NearestGerm.transform.position - transform.position).normalized;
+            transform.Translate(lookDirection * Time.deltaTime * neutrophilSpeed, Space.World);
+            }
         switch(chosen attacks)
+        {
         case "toxin":
           StartCoroutine(Toxin());
           break;
@@ -97,7 +102,12 @@ public class NeutophilScript : MonoBehaviour
         while(lookDirection <= 3)
         {
         yield return new WaitForSeconds(toxinAttackSpeed);
-        instantiate(toxinPrefab,transform.positition,lookDirection)
+        instantiate(toxinPrefab,transform.positition,lookDirection);
+        stunned = true
+        }
+        else
+        {
+        stunned = false
         }
     }
     }
