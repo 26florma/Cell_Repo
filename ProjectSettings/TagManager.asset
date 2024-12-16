@@ -8,6 +8,8 @@ TagManager:
   - germ
   - Nucl
   - border
+  - Drone
+  - Goal
   layers:
   - Default
   - TransparentFX

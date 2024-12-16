@@ -15,12 +15,12 @@ public class RhinovirusScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Cell != null && cellIsAlive == false)
+        if(Cell != null) //&& Cell.cellIsAlive == false)
         {
-        Cell.deadActions = "InfectedByVirus";
+        //Cell.deadActions = "InfectedByVirus";
         }
     }
-    public void OnTriggerEnter2D(Collider CellObject)
+    public void OnTriggerEnter2D(Collider2D CellObject)
     {
      if(CellObject.gameObject.CompareTag("Cell"))
      {

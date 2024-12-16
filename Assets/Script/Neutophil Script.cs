@@ -14,7 +14,7 @@ public class NeutophilScript : MonoBehaviour
     public float nearestDistance = 100000;
     public float distance;
     public bool onGerm = false;
-    public bool stunnd = false;
+    public bool stunned = false;
     public string chosenAttacks;
     
     public GameObject[] AllGerms;
@@ -26,106 +26,100 @@ public class NeutophilScript : MonoBehaviour
     {
       FindNearestGerm();
     }
-    
+
     // Update is called once per frame
     void Update()
     {
-    if(NearestGerm != null)
-    {
-            if(stunned = false)
-            {
-            Vector3 lookDirection = (NearestGerm.transform.position - transform.position).normalized;
-            transform.Translate(lookDirection * Time.deltaTime * neutrophilSpeed, Space.World);
-            }
-        switch(chosen attacks)
+        if (NearestGerm != null)
         {
-        case "toxin":
-          StartCoroutine(Toxin());
-          break;
-        case "nets":
-          StartCoroutine(Nets());
-          break;
-        default:
-          StartCoroutine(Phagocytosis());
-          break;
+            if (stunned == false)
+            {
+                Vector3 lookDirection = (NearestGerm.transform.position - transform.position).normalized;
+                transform.Translate(lookDirection * Time.deltaTime * neutrophilSpeed, Space.World);
+            }
+            switch (chosenAttacks)
+            {
+                case "toxin":
+                    StartCoroutine(Toxin());
+                    break;
+                case "nets":
+                    StartCoroutine(Nets());
+                    break;
+                default:
+                    StartCoroutine(Phagocytosis());
+                    break;
+            }
         }
     }
-    public void FindNearestGerm()
-    {
-    AllGerms = GameObject.FindGameObjectsWithTag("germ");
-        if(AllGerms.Length > 0)
+        public void FindNearestGerm()
         {
-            nearestDistance = 100000;
-            for(int i = 0; i < AllGerms.Length; i++)
+            AllGerms = GameObject.FindGameObjectsWithTag("germ");
+            if (AllGerms.Length > 0)
             {
-                if(AllGerms[i] != null)
+                nearestDistance = 100000;
+                for (int i = 0; i < AllGerms.Length; i++)
                 {
-                Vector3 targetGermPos = AllGerms[i].transform.position;
-                distance = Vector3.Distance(transform.position,targetGermPos);
-                    if(distance < nearestDistance)
+                    if (AllGerms[i] != null)
                     {
-                    nearestDistance = distance;
-                    NearestGerm = AllGerms[i];
+                        Vector3 targetGermPos = AllGerms[i].transform.position;
+                        distance = Vector3.Distance(transform.position, targetGermPos);
+                        if (distance < nearestDistance)
+                        {
+                            nearestDistance = distance;
+                            NearestGerm = AllGerms[i];
+                        }
                     }
                 }
             }
+            else
+            {
+                NearestGerm = null;
+            }
         }
-        else
+        IEnumerator Phagocytosis()
         {
-        NearestGerm = null;
+            yield return new WaitForSeconds(phagocytosisAttackSpeed);
+            //phagocytosis
+            if (onGerm == true)
+            {
+                GermMovement germMovement = NearestGerm.gameObject.GetComponent<GermMovement>();
+                germMovement.germHP -= neutrophilD;
+                germMovement.stunned = true;
+                if (germMovement.germHP <= 0)
+                {
+                    germMovement.stunned = false;
+                    onGerm = false;
+                    Destroy(NearestGerm);
+                    NearestGerm = null;
+                    FindNearestGerm();
+                }
+            }
         }
-    }
-    IEnumerator Phagocytosis()
-    {
-    yield return new WaitForSeconds(phagocytosisAttackSpeed);
-    //phagocytosis
-    if(onGerm == true)
-    {
-    GermMovement germMovement = NearestGerm.gameObject.GetComponent<GermMovement>();
-    germMovement.germHP -= neutrophilD;
-    germMovement.stunned = true;
-        if(germMovement.germHP <= 0)
-        {
-        NearestGerm.stunned = false;
-        onGerm = false;
-        Destroy(NearestGerm);
-        NearestGerm = null;
-        FindNearestGerm();
-        }
-    }
-    }
-    IEnumerator Toxin()
-    {
-    //toxicSpray
-    if(level >= 2)
-    {
-        while(lookDirection <= 3)
+        IEnumerator Toxin()
         {
         yield return new WaitForSeconds(toxinAttackSpeed);
-        instantiate(toxinPrefab,transform.positition,lookDirection);
-        stunned = true
+        //toxicSpray
+        if (level >= 2)
+            {
+            Debug.Log("Finish Later");
+            }
         }
-        else
+        IEnumerator Nets()
         {
-        stunned = false
+            yield return new WaitForSeconds(netAttackSpeed);
+            //nets
+            if (level >= 3)
+            {
+                Debug.Log("finish later");
+            }
         }
-    }
-    }
-    IEnumerator Nets()
-    {
-    yield return new WaitForSeconds(netAttackSpeed);
-    //nets
-    If(level >= 3)
-    {  
-    Debug.Log("finish later");
-    }
-    }
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.gameObject.CompareTag("germ"))
+        void OnTriggerEnter2D(Collider2D collision)
         {
-        onGerm = true;
-        NearestGerm = collision.gameObject;
+            if (collision.gameObject.CompareTag("germ"))
+            {
+                onGerm = true;
+                NearestGerm = collision.gameObject;
+            }
+
         }
-    }
 }

@@ -26,7 +26,7 @@ public class GermMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        aggression = random.range(0, aggression);
+        aggression = UnityEngine.Random.Range(0, aggression);
         if(aggression == 10)
         {
         moveTowardsGoal = false;
@@ -54,11 +54,11 @@ public class GermMovement : MonoBehaviour
          if(germHP <= 0)
          {
             Destroy(gameObject);
-            PlayerMovement.TargetedGerm.Remove(this);
                if(Nucleus != null)
-                {
-                 NuclScript.attackingGerm.Remove(this);
-                }
+               {
+                NucleusScript NuclScript = Nucleus.GetComponent<NucleusScript>();
+                NuclScript.attackingGerm.Remove(gameObject);
+               }
          }
     }
     public void GermMovementFunction()
@@ -103,7 +103,7 @@ public class GermMovement : MonoBehaviour
     }
     public void OnTriggerEnter2D(Collider2D collision)
     {
-    if(collision.gameObject.CompareTag("Nucl") || collision.object.compareTag("Goal"))
+    if(collision.gameObject.CompareTag("Nucl") || collision.gameObject.CompareTag("Goal"))
     {
             Nucleus = collision.gameObject;
             NucleusScript NuclScript = Nucleus.GetComponent<NucleusScript>();
