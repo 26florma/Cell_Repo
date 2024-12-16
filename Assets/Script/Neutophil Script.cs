@@ -7,10 +7,13 @@ public class NeutophilScript : MonoBehaviour
     public int neutrophilHP = 10;
     public int neutrophilD = 2;
     public int phagocytosisAttackSpeed = 5;
+    public int toxinAttackSpeed = 10;
+    public int level = 1;
     public float neutrophilSpeed = 2;
     public float nearestDistance = 100000;
     public float distance;
     public bool onGerm = false;
+    public string chosenAttacks;
     
     public GameObject[] AllGerms;
     public GameObject NearestGerm;
@@ -30,7 +33,13 @@ public class NeutophilScript : MonoBehaviour
         transform.Translate(lookDirection * Time.deltaTime * neutrophilSpeed, Space.World);
         if(onGerm == true)
         {
-        StartCoroutine(Phagocytosis());
+        switch(chosen attacks)
+        case "toxin":
+          IEnumerator Toxin()
+          break;
+        default:
+          StartCoroutine(Phagocytosis());
+          break;
         }
         }
     }
@@ -79,13 +88,12 @@ public class NeutophilScript : MonoBehaviour
     }
     }
     IEnumerator Toxin()
-    public void NeutrophilAttacks()
     {
      yield return new WaitForSeconds(toxinAttackSpeed);
-    if(Level >= 2)
+    //toxicSpray
+    if(level >= 2)
     {
-    
-    
+    Debug.Log("finish later");
     }
     }
     void OnTriggerEnter2D(Collider2D collision)
