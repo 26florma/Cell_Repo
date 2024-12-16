@@ -8,6 +8,7 @@ public class NeutophilScript : MonoBehaviour
     public int neutrophilD = 2;
     public int phagocytosisAttackSpeed = 5;
     public int toxinAttackSpeed = 10;
+    public int netAttackSpeed =8;
     public int level = 1;
     public float neutrophilSpeed = 2;
     public float nearestDistance = 100000;
@@ -35,7 +36,10 @@ public class NeutophilScript : MonoBehaviour
         {
         switch(chosen attacks)
         case "toxin":
-          IEnumerator Toxin()
+          StartCoroutine(Toxin());
+          break;
+        case "nets":
+          StartCoroutine(Nets());
           break;
         default:
           StartCoroutine(Phagocytosis());
@@ -93,6 +97,15 @@ public class NeutophilScript : MonoBehaviour
     //toxicSpray
     if(level >= 2)
     {
+    Debug.Log("finish later");
+    }
+    }
+    IEnumerator Nets()
+    {
+    yield return new WaitForSeconds(netAttackSpeed);
+    //nets
+    If(level >= 3)
+    {  
     Debug.Log("finish later");
     }
     }
