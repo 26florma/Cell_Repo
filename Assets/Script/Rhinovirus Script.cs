@@ -15,9 +15,9 @@ public class RhinovirusScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Cell != null) //&& Cell.cellIsAlive == false)
+        if(Cell != null && CellScript.cellIsAlive == false)
         {
-        //Cell.deadActions = "InfectedByVirus";
+        CellScript.deadActions = "InfectedByVirus";
         }
     }
     public void OnTriggerEnter2D(Collider2D CellObject)
@@ -25,6 +25,7 @@ public class RhinovirusScript : MonoBehaviour
      if(CellObject.gameObject.CompareTag("Cell"))
      {
             Cell = CellObject.gameObject;
+            CellsScript CellScript = Cell.gameObject.GetComponet<CellsScript>;
      }
     }
 }
