@@ -19,8 +19,8 @@ public class GermMovement : MonoBehaviour
     public GameObject NearestNucl;
     public GameObject Player;
     public GameObject Goal;
-
-    private int aggression = 10;
+    public int aggression = 10;
+    
     private bool moveTowardsGoal = true;
     private GameObject Nucleus;
     // Start is called before the first frame update
