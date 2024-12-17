@@ -27,7 +27,7 @@ public class GermMovement : MonoBehaviour
     void Start()
     {
         aggression = UnityEngine.Random.Range(0, aggression);
-        if(aggression == 10)
+        if(aggression == 0)
         {
         moveTowardsGoal = false;
         FindNearestObject();

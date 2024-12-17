@@ -10,6 +10,7 @@ TagManager:
   - border
   - Drone
   - Goal
+  - Cell
   layers:
   - Default
   - TransparentFX

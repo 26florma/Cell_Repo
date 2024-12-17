@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class RhinovirusScript : MonoBehaviour
@@ -15,17 +16,21 @@ public class RhinovirusScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Cell != null && CellScript.cellIsAlive == false)
+        if (Cell != null)
         {
-        CellScript.deadActions = "InfectedByVirus";
-        }
+            CellsScript CellScript = Cell.gameObject.GetComponent<CellsScript>();
+            if (Cell != null && CellScript.cellIsAlive == false)
+            {
+                CellScript.deadActions = "InfectedByVirus";
+            }
+        } 
     }
     public void OnTriggerEnter2D(Collider2D CellObject)
     {
      if(CellObject.gameObject.CompareTag("Cell"))
      {
             Cell = CellObject.gameObject;
-            CellsScript CellScript = Cell.gameObject.GetComponet<CellsScript>;
+            CellsScript CellScript = Cell.gameObject.GetComponent<CellsScript>();
      }
     }
 }
