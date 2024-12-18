@@ -120,7 +120,7 @@ public class NeutophilScript : MonoBehaviour
             {
                 onGerm = true;
                 NearestGerm = collision.gameObject;
-                stunned = true;
+                
             }
 
         }

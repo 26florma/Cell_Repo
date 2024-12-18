@@ -13,7 +13,6 @@ public class PlayerMomentScript : MonoBehaviour
 
     public GameObject borderScript;
 
-    private int stemCellLimit;
     private bool collisionWithGerm;
     // Start is called before the first frame update
     void Start()
@@ -33,15 +32,15 @@ public class PlayerMomentScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0) && collisionWithGerm)
         {
             Debug.Log("Hit Detected");
-            DNA =+ 1;
+            DNA += 1;
             if(germ !=null)
             {
             germ.GetComponent<GermMovement>().germHP -= damage;
             }
         }
-        if (stemCellLimit == DNA)
+        if (stemCellBar <= DNA)
         {
-            stemCells =+ 1;
+            stemCells += 1;
             DNA = 0;
         }
     }

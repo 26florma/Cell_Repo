@@ -23,6 +23,7 @@ public class GermMovement : MonoBehaviour
     
     private bool moveTowardsGoal = true;
     private GameObject Nucleus;
+    private GameObject Neutrophil;
     // Start is called before the first frame update
     void Start()
     {
@@ -103,11 +104,18 @@ public class GermMovement : MonoBehaviour
     }
     public void OnTriggerEnter2D(Collider2D collision)
     {
-    if(collision.gameObject.CompareTag("Nucl") || collision.gameObject.CompareTag("Goal"))
-    {
+        if (collision.gameObject.CompareTag("Nucl") || collision.gameObject.CompareTag("Goal"))
+        {
             Nucleus = collision.gameObject;
             NucleusScript NuclScript = Nucleus.GetComponent<NucleusScript>();
             stunned = true;
-    }
+            if (collision.gameObject.CompareTag("Neutrophil"))
+            {
+                Neutrophil = collision.gameObject;
+                NeutophilScript NeutScript = Neutrophil.GetComponent<NeutophilScript>();
+                    stunned = true;
+                
+            }
+        }
     }
 }

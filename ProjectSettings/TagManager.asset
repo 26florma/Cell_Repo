@@ -11,6 +11,7 @@ TagManager:
   - Drone
   - Goal
   - Cell
+  - Neutrophil
   layers:
   - Default
   - TransparentFX
