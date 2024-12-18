@@ -92,6 +92,7 @@ public class NeutophilScript : MonoBehaviour
                     Destroy(NearestGerm);
                     NearestGerm = null;
                     FindNearestGerm();
+                    stunned = false;
                 }
             }
         }
@@ -119,6 +120,7 @@ public class NeutophilScript : MonoBehaviour
             {
                 onGerm = true;
                 NearestGerm = collision.gameObject;
+                stunned = true;
             }
 
         }
