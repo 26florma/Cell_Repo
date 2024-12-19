@@ -109,13 +109,12 @@ public class GermMovement : MonoBehaviour
             Nucleus = collision.gameObject;
             NucleusScript NuclScript = Nucleus.GetComponent<NucleusScript>();
             stunned = true;
-            if (collision.gameObject.CompareTag("Neutrophil"))
-            {
-                Neutrophil = collision.gameObject;
-                NeutophilScript NeutScript = Neutrophil.GetComponent<NeutophilScript>();
-                    stunned = true;
-                
-            }
+        }
+        if (collision.gameObject.CompareTag("Neutrophil"))
+        {
+            Neutrophil = collision.gameObject;
+            NeutophilScript NeutScript = Neutrophil.GetComponent<NeutophilScript>();
+            stunned = true;    
         }
     }
 }
