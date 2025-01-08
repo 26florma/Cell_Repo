@@ -42,13 +42,17 @@ public class NucleusScript : MonoBehaviour
     }
      IEnumerator GermDamageDelay()
      {
-        GermMovement germMovement = Germ.GetComponent<GermMovement>();
-        while (attackingGerm.Count > 0)
-         {
-           yield return new WaitForSeconds(germMovement.germAttackSpeed);
-           DealDamageToNucl();
-           Debug.Log("Ran Damage cooldown");
-         }
+        if (Germ != null)
+        {
+            GermMovement germMovement = Germ.GetComponent<GermMovement>();
+
+            while (attackingGerm.Count > 0)
+            {
+                yield return new WaitForSeconds(germMovement.germAttackSpeed);
+                DealDamageToNucl();
+                Debug.Log("Ran Damage cooldown");
+            }
+        }
      }
 
      public void DealDamageToNucl()
