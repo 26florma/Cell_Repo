@@ -85,6 +85,7 @@ public class NeutophilScript : MonoBehaviour
                 GermMovement germMovement = NearestGerm.gameObject.GetComponent<GermMovement>();
                 germMovement.germHP -= neutrophilD;
                 germMovement.stunned = true;
+                stunned = true
                 if (germMovement.germHP <= 0)
                 {
                     germMovement.stunned = false;
