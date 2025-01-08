@@ -45,7 +45,6 @@ public class NucleusScript : MonoBehaviour
         if (Germ != null)
         {
             GermMovement germMovement = Germ.GetComponent<GermMovement>();
-
             while (attackingGerm.Count > 0)
             {
                 yield return new WaitForSeconds(germMovement.germAttackSpeed);
@@ -54,9 +53,10 @@ public class NucleusScript : MonoBehaviour
             }
         }
      }
-
-     public void DealDamageToNucl()
-     {
+    public void DealDamageToNucl()
+    {
+        if (Germ != null) 
+        {
         GermMovement germMovement = Germ.GetComponent<GermMovement>();
         if (attackingGerm.Count > 0)
         {
@@ -67,6 +67,7 @@ public class NucleusScript : MonoBehaviour
                     NuclHP -= germMovement.germD;
                 }
             }
+        }
         }
      }
     //detection for hit

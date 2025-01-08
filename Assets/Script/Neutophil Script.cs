@@ -14,9 +14,11 @@ public class NeutophilScript : MonoBehaviour
     public float nearestDistance = 100000;
     public float distance;
     public bool onGerm = false;
-    public bool stunned = false;
+    public bool selfStunned = false;
     public string chosenAttacks;
-    
+    public int selfStunDelay =3;
+
+
     public GameObject[] AllGerms;
     public GameObject NearestGerm;
     public GameObject germ;
@@ -32,7 +34,7 @@ public class NeutophilScript : MonoBehaviour
     {
         if (NearestGerm != null)
         {
-            if (stunned == false)
+            if (selfStunned == false)
             {
                 Vector3 lookDirection = (NearestGerm.transform.position - transform.position).normalized;
                 transform.Translate(lookDirection * Time.deltaTime * neutrophilSpeed, Space.World);
@@ -50,6 +52,19 @@ public class NeutophilScript : MonoBehaviour
                     break;
             }
         }
+        if(onGerm == true)
+        {
+            SelfStunDelay();
+        }
+        else
+        {
+            selfStunned = false;
+        }
+    }
+    IEnumerator SelfStunDelay()
+    {
+        yield return new WaitForSeconds(selfStunDelay);
+        selfStunned= true;
     }
         public void FindNearestGerm()
         {
@@ -85,7 +100,6 @@ public class NeutophilScript : MonoBehaviour
                 GermMovement germMovement = NearestGerm.gameObject.GetComponent<GermMovement>();
                 germMovement.germHP -= neutrophilD;
                 germMovement.stunned = true;
-                stunned = true
                 if (germMovement.germHP <= 0)
                 {
                     germMovement.stunned = false;
@@ -93,7 +107,6 @@ public class NeutophilScript : MonoBehaviour
                     Destroy(NearestGerm);
                     NearestGerm = null;
                     FindNearestGerm();
-                    stunned = false;
                 }
             }
         }
