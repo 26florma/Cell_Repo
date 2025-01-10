@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7bbc5fe0bf6686429921d95d7cc6e9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 3
+  movementSpeed: 9.18
   distance: 0
   nearestDistance: 10000
   germHP: 3
@@ -111,7 +111,7 @@ MonoBehaviour:
   NearestNucl: {fileID: 0}
   Player: {fileID: 0}
   Goal: {fileID: 0}
-  aggression: 10
+  aggression: 0
 --- !u!61 &104457680053145666
 BoxCollider2D:
   m_ObjectHideFlags: 0

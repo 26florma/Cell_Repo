@@ -16,7 +16,7 @@ public class NeutophilScript : MonoBehaviour
     public bool onGerm = false;
     public bool selfStunned = false;
     public string chosenAttacks;
-    public int selfStunDelay =3;
+    public float selfStunDelay =3;
 
 
     public GameObject[] AllGerms;
@@ -54,18 +54,21 @@ public class NeutophilScript : MonoBehaviour
         }
         if(onGerm == true)
         {
-            SelfStunDelay();
+            StartCoroutine(SelfStunningDelay());
+            Debug.Log("running germ detection for selfstun");
         }
         else
         {
             selfStunned = false;
+            Debug.Log("NOT running germ detection for selfstun");
         }
     }
-    IEnumerator SelfStunDelay()
-    {
+        IEnumerator SelfStunningDelay()
+        {
         yield return new WaitForSeconds(selfStunDelay);
         selfStunned= true;
-    }
+        Debug.Log("Running selfstun");
+        }
         public void FindNearestGerm()
         {
             AllGerms = GameObject.FindGameObjectsWithTag("germ");

@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 3133700515552826965}
   - component: {fileID: 8414764950886207130}
   - component: {fileID: 8603424661671673634}
-  - component: {fileID: 6075059036559210508}
+  - component: {fileID: 682660897849327498}
   m_Layer: 0
   m_Name: Goal
   m_TagString: Goal
@@ -187,8 +187,8 @@ MonoBehaviour:
   germIsAttacking: 0
   attackingGerm: []
   Germ: {fileID: 0}
---- !u!61 &6075059036559210508
-BoxCollider2D:
+--- !u!58 &682660897849327498
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -220,15 +220,5 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Radius: 0.5

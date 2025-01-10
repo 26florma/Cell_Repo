@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3250603931027508097}
   m_Layer: 0
   m_Name: Neutrophil
-  m_TagString: Untagged
+  m_TagString: Neutrophil
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -153,8 +153,9 @@ MonoBehaviour:
   nearestDistance: 100000
   distance: 0
   onGerm: 0
-  stunned: 0
+  selfStunned: 0
   chosenAttacks: 
+  selfStunDelay: 0.2
   AllGerms: []
   NearestGerm: {fileID: 0}
   germ: {fileID: 0}

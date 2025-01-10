@@ -101,8 +101,8 @@ MonoBehaviour:
   stemCells: 0
   damage: 105
   germ: {fileID: 0}
-  stemCellBar: 0
-  DNA: 0
+  stemCellBar: 5
+  DNA: 20
   borderScript: {fileID: 0}
 --- !u!61 &4268214945474301421
 BoxCollider2D:
