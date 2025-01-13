@@ -12,6 +12,7 @@ TagManager:
   - Goal
   - Cell
   - Neutrophil
+  - spawner
   layers:
   - Default
   - TransparentFX
