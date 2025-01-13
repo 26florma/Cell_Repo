@@ -35,7 +35,7 @@ public class Spawner : MonoBehaviour
     public float spawnRate = 1.2;
     public GameObject ObjectToSpawn;
     public bool waveEnd = true 
-    void Update
+    void Update()
     {
      if(int i = 0; i > numberToSpawn; i++ && waveEnd == false)
      {
@@ -43,7 +43,7 @@ public class Spawner : MonoBehaviour
      }
      else
      {
-     waveEnd = true
+     waveEnd = true;
      }
     }
     IEnumerator StartSpawningPathogens()
@@ -55,7 +55,7 @@ public class Spawner : MonoBehaviour
      }
      else
      {
-     debug.log("ObjectToSpawn not set yet")
+     debug.log("ObjectToSpawn not set yet");
      }
     }
 */
