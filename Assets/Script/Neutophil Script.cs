@@ -27,6 +27,7 @@ public class NeutophilScript : MonoBehaviour
     void Start()
     {
       FindNearestGerm();
+        Debug.Log(Random.Range(1, 5));
     }
 
     // Update is called once per frame

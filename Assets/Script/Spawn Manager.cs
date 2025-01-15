@@ -32,7 +32,7 @@ using UnityEngine;
 using System.Linq;
 using Unity.VisualScripting.Antlr3.Runtime;
 
-public class SpawnManager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
    public bool mutations = false;
    public int mutationCount = 3;

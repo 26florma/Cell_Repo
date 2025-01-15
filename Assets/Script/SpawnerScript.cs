@@ -15,7 +15,7 @@ public class Spawner : MonoBehaviour
     {
         for (int i = 0; i > numberToSpawn; i++)
         {
-            if (waveEnd == false)
+            if (waveEnd != false)
             {
                 StartCoroutine(StartSpawningPathogens());
             }
@@ -29,9 +29,11 @@ public class Spawner : MonoBehaviour
     IEnumerator StartSpawningPathogens()
     {
         yield return new WaitForSeconds(spawnRate);
+        UnityEngine.Debug.Log("spawning");
         if (ObjectToSpawn != null)
         {
             Instantiate(ObjectToSpawn, transform.position, transform.rotation);
+            UnityEngine.Debug.Log("spawning" + ObjectToSpawn);
         }
         else
         {
