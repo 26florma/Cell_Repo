@@ -8,19 +8,20 @@ using UnityEngine.UIElements;
 
 public class GermMovement : MonoBehaviour
 {
-    public float movementSpeed =10;
+    public float movementSpeed = 10;
     public float distance;
     public float nearestDistance = 10000;
     public int germHP = 3;
     public int germD = 1;
     public int germAttackSpeed = 10;
+    public int selfStunDelay = 3;
     public bool stunned = false;
-    public List<GameObject> AllObjects = new List<GameObject>(); 
+    public List<GameObject> AllObjects = new List<GameObject>();
     public GameObject NearestNucl;
     public GameObject Player;
     public GameObject Goal;
     public int aggression = 10;
-    
+
     private bool moveTowardsGoal = true;
     private GameObject Nucleus;
     private GameObject Neutrophil;
@@ -28,14 +29,14 @@ public class GermMovement : MonoBehaviour
     void Start()
     {
         aggression = UnityEngine.Random.Range(0, aggression);
-        if(aggression == 0)
+        if (aggression == 0)
         {
-        moveTowardsGoal = false;
-        FindNearestObject();
+            moveTowardsGoal = false;
+            FindNearestObject();
         }
         else
         {
-        moveTowardsGoal = true;
+            moveTowardsGoal = true;
         }
         AllObjects = GameObject.FindGameObjectsWithTag("Nucl").ToList();
         Player = GameObject.FindGameObjectWithTag("Drone");
@@ -44,23 +45,23 @@ public class GermMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-         if(stunned == false)
-         {
-         GermMovementFunction();
-         }
-         if(NearestNucl == null && moveTowardsGoal == false)
-         {
+        if (stunned == false)
+        {
+            GermMovementFunction();
+        }
+        if (NearestNucl == null && moveTowardsGoal == false)
+        {
             FindNearestObject();
-         }
-         if(germHP <= 0)
-         {
+        }
+        if (germHP <= 0)
+        {
             Destroy(gameObject);
-               if(Nucleus != null)
-               {
+            if (Nucleus != null)
+            {
                 NucleusScript NuclScript = Nucleus.GetComponent<NucleusScript>();
                 NuclScript.attackingGerm.Remove(gameObject);
-               }
-         }
+            }
+        }
     }
     public void GermMovementFunction()
     {//moves germ in the direction of nearest object or moves towards goal
@@ -79,27 +80,27 @@ public class GermMovement : MonoBehaviour
     }
     public void FindNearestObject()
     {//calculates the nearest objects distance from the germ
-       AllObjects = GameObject.FindGameObjectsWithTag("Nucl").ToList();
+        AllObjects = GameObject.FindGameObjectsWithTag("Nucl").ToList();
         if (AllObjects.Count > 0)
         {
             nearestDistance = 10000f;
-          
-          for (int i = 0; i < AllObjects.Count; i++)
-          {
-           if (AllObjects[i] != null)
-           {
-             Vector3 targetPos = AllObjects[i].transform.position;
-             distance = Vector3.Distance(transform.position,targetPos);
 
-             if (distance < nearestDistance)
-             {
-              nearestDistance = distance;
-              NearestNucl = AllObjects[i];
+            for (int i = 0; i < AllObjects.Count; i++)
+            {
+                if (AllObjects[i] != null)
+                {
+                    Vector3 targetPos = AllObjects[i].transform.position;
+                    distance = Vector3.Distance(transform.position, targetPos);
 
-              Debug.Log("FindNearestObject is running");
-             }
-           }
-         }
+                    if (distance < nearestDistance)
+                    {
+                        nearestDistance = distance;
+                        NearestNucl = AllObjects[i];
+
+                        Debug.Log("FindNearestObject is running");
+                    }
+                }
+            }
         }
     }
     public void OnTriggerEnter2D(Collider2D collision)
@@ -108,13 +109,19 @@ public class GermMovement : MonoBehaviour
         {
             Nucleus = collision.gameObject;
             NucleusScript NuclScript = Nucleus.GetComponent<NucleusScript>();
-            stunned = true;
+            StartCoroutine(SelfStunningDelay());
         }
+
         if (collision.gameObject.CompareTag("Neutrophil"))
         {
             Neutrophil = collision.gameObject;
             NeutophilScript NeutScript = Neutrophil.GetComponent<NeutophilScript>();
-            stunned = true;    
+            stunned = true;
         }
+    }
+    IEnumerator SelfStunningDelay()
+    {
+        yield return new WaitForSeconds(selfStunDelay);
+        stunned = true;
     }
 }

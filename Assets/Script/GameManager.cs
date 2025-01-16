@@ -14,14 +14,13 @@ public class GameManager : MonoBehaviour
         AllPathogens = GameObject.FindGameObjectsWithTag("germ").ToList();
         for (int i = mutationCount; mutationCount > 0; mutationCount-= 1)
         {
-            int mutation = UnityEngine.Random.Range(0, AllPathogens[]);
+            int mutation = UnityEngine.Random.Range(0, AllPathogens.Count);
             int MutationBuff = UnityEngine.Random.Range(1, 4);
             if (AllPathogens != null)
             {
                 GermMovement MutationTarget = AllPathogens[mutation].GetComponent<GermMovement>();
 
-                Switch(MutationTarget)
-               {
+                switch(MutationBuff){
                 case 1:
                 MutationTarget.germHP += 1;
                     break;

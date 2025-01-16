@@ -49,7 +49,7 @@ public class NucleusScript : MonoBehaviour
             {
                 yield return new WaitForSeconds(germMovement.germAttackSpeed);
                 DealDamageToNucl();
-                Debug.Log("Ran Damage cooldown");
+
             }
         }
      }
