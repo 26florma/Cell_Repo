@@ -51,12 +51,10 @@ public class CellsScript : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D GermObject)
     {
-        if(GermObject.gameObject.CompareTag("germ") && Pathogen == null)
+        if(GermObject.gameObject.CompareTag("germ") && Pathogen != null)
         {
-         Pathogen = GermObject.gameObject;
          breachedByGerm = true;
         }
-        
     }
     public void OnTriggerStay2D(Collider2D collision)
     {
