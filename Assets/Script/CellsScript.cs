@@ -12,52 +12,71 @@ public class CellsScript : MonoBehaviour
     public bool breachedByGerm = false;
     public string deadActions;
     public int spawnUponInfection = 3;
+    int j = 0;
+    int i = 0;
+    bool CELLISALIVE = true;
     public List<GameObject> AllPathogens= new List<GameObject>();
     public GameObject Nucleus;
     public GameObject Rhinovirus;
     // Start is called before the first frame update
     void Start()
     {
-        
-        
+
     }
     // Update is called once per frame
     void Update()
     {
-            if (Nucleus == null && breachedByGerm && Rhinovirus != null)
-            {
-            int i = 0;
-                while(i <= spawnUponInfection)
-                {
-                    if (i == spawnUponInfection)
-                    {
-                        GermMovement RhinovirusScript = Rhinovirus.GetComponent<GermMovement>();
-                        RhinovirusScript.stunned = false;
-                        Destroy(gameObject);
+        if (Nucleus == null && breachedByGerm && Rhinovirus != null && CELLISALIVE == true)
+        {
 
-                    }
-                Debug.Log("running germ infection");
-                    switch (deadActions)
+            while (i <= spawnUponInfection && CELLISALIVE == true)
+            {
+                if (i == spawnUponInfection && CELLISALIVE == true)
+                {
+                    
+                    while (j <= spawnUponInfection && CELLISALIVE == true)
                     {
-                        case "InfectedByVirus":
-                            if (Rhinovirus != null)
-                            {
-                            Instantiate(Rhinovirus, transform.position, transform.rotation);
-                            Debug.Log(i);
-                            }
-                            break;
-                        case "KilledByPathogen":
-                            Destroy(gameObject);
-                            break;
-                        default:
-                            Debug.Log("Error");
-                            break;
+                        
+                        foreach (GameObject Rhinovirus in AllPathogens)
+                        {
+                            GermMovement RhinovirusScript = Rhinovirus.GetComponent<GermMovement>();
+                            RhinovirusScript.stunned = false;
+
+                            
+                        }
+                        j++;
                     }
-                AllPathogens = GameObject.FindGameObjectsWithTag("Germ").ToList();
+                    if (j >= spawnUponInfection)
+                    {
+                        Destroy(gameObject);
+                        CELLISALIVE = false;
+                    }
+
+                }
+                if (i == spawnUponInfection) continue;
+                Debug.Log("running germ infection");
+                switch (deadActions)
+                {
+                case "InfectedByVirus":
+                if (Rhinovirus != null)
+                {
+                       Instantiate(Rhinovirus, transform.position, transform.rotation);
+                }
+                  break;
+                case "KilledByPathogen":
+                  Destroy(gameObject);
+                  break;
+                default:
+                  Debug.Log("Error");
+                  break;
+                }
+                AllPathogens = GameObject.FindGameObjectsWithTag("germ").ToList();
                 i++;
                 
-                }
             }
+            StartCoroutine(SafeGuard());
+        }
+
     }
 
     public void OnTriggerEnter2D(Collider2D GermObject)
@@ -75,5 +94,10 @@ public class CellsScript : MonoBehaviour
         }
         
     }
-
+    IEnumerator SafeGuard()
+    {
+        yield return new WaitForSeconds(1);
+        Destroy(gameObject);
+        Debug.Log("Ran SafeGuard");
+    }
 }
