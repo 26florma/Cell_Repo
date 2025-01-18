@@ -17,15 +17,13 @@ public class SpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        for(int i = 0; i < AllSpawners.Count; i++)
+        /*for(int i = 0; i < AllSpawners.Count; i++)
         {
             Spawner Spawner = AllSpawners[i].GetComponent<Spawner>();
             if (AllSpawners != null)
             {
                 Spawner.waveEnd = false;
             }
-        }
+        }*/
     }
-/*
-    */
 }

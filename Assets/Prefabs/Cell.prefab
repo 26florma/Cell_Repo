@@ -135,7 +135,7 @@ MonoBehaviour:
   NuclHP: 20
   germIsAttacking: 0
   attackingGerm: []
-  Germ: {fileID: 0}
+  Germ: {fileID: 6550317118849817397, guid: caa50b8e76c52374a840762f928bd02b, type: 3}
 --- !u!61 &6053251887594053460
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -196,6 +196,7 @@ MonoBehaviour:
   breachedByGerm: 0
   deadActions: 
   spawnUponInfection: 3
+  AllPathogens: []
   Nucleus: {fileID: 0}
   Rhinovirus: {fileID: 0}
 --- !u!1 &7793975828637714192
@@ -299,8 +300,9 @@ MonoBehaviour:
   breachedByGerm: 0
   deadActions: 
   spawnUponInfection: 3
+  AllPathogens: []
   Nucleus: {fileID: 7389527416701893917}
-  Rhinovirus: {fileID: 0}
+  Rhinovirus: {fileID: 6550317118849817397, guid: caa50b8e76c52374a840762f928bd02b, type: 3}
 --- !u!58 &2250801685237040203
 CircleCollider2D:
   m_ObjectHideFlags: 0

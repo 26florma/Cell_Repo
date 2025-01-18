@@ -11,33 +11,64 @@ public class Spawner : MonoBehaviour
     public float spawnRate = 1.2f;
     public GameObject ObjectToSpawn;
     public bool waveEnd = true;
+    public bool startSpawning = true;
+    public int ObjectsSpawned;
     void Update()
     {
-        for (int i = 0; i > numberToSpawn; i++)
-        {
-            if (waveEnd != false)
+            if (waveEnd == true)
             {
+                UnityEngine.Debug.Log("Runing else");
+                waveEnd = true;
+                StopCoroutine(StartSpawningPathogens());
+            }
+            if (waveEnd == false)
+            {
+                UnityEngine.Debug.Log("Running Coroutine");
                 StartCoroutine(StartSpawningPathogens());
             }
-            else
+            if(numberToSpawn < ObjectsSpawned)
             {
-                waveEnd = true;
+            waveEnd = true;
+            StopCoroutine(StartSpawningPathogens());
+            StopCoroutine(StartDelay());
+            startSpawning = false;
             }
-        }
-
     }
     IEnumerator StartSpawningPathogens()
     {
-        yield return new WaitForSeconds(spawnRate);
-        UnityEngine.Debug.Log("spawning");
-        if (ObjectToSpawn != null)
+        while (waveEnd == false)
         {
-            Instantiate(ObjectToSpawn, transform.position, transform.rotation);
-            UnityEngine.Debug.Log("spawning" + ObjectToSpawn);
-        }
-        else
-        {
-            UnityEngine.Debug.Log("ObjectToSpawn not set yet");
+            yield return new WaitForSeconds(spawnRate);
+            if (ObjectToSpawn != null && startSpawning && numberToSpawn != ObjectsSpawned)
+            {
+                Instantiate(ObjectToSpawn, transform.position, transform.rotation);
+                UnityEngine.Debug.Log("spawning" + ObjectToSpawn);
+                ObjectsSpawned++;
+                startSpawning = false;
+                StartCoroutine(StartDelay());
+                StopCoroutine(StartSpawningPathogens());
+            }
+            if(numberToSpawn == ObjectsSpawned)
+            {
+                StopCoroutine(StartSpawningPathogens());
+                StopCoroutine(StartDelay());
+            }
         }
     }
+    IEnumerator StartDelay()
+    {
+        yield return new WaitForSeconds(spawnRate);
+        if(numberToSpawn != ObjectsSpawned)
+        {
+            startSpawning = true;
+            StartCoroutine(StartSpawningPathogens());
+            StopCoroutine(StartDelay());
+        }
+        if(numberToSpawn == ObjectsSpawned)
+        {
+            StopCoroutine(StartSpawningPathogens());
+            StopCoroutine(StartDelay());
+        }
+    }
+
 } 

@@ -28,6 +28,14 @@ public class GermMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
+        AllObjects = GameObject.FindGameObjectsWithTag("Nucl").ToList();
+        Player = GameObject.FindGameObjectWithTag("Drone");
+        Goal = GameObject.FindGameObjectWithTag("Goal");
+    }
+    // Update is called once per frame
+    void Update()
+    {
         aggression = UnityEngine.Random.Range(0, aggression);
         if (aggression == 0)
         {
@@ -38,13 +46,6 @@ public class GermMovement : MonoBehaviour
         {
             moveTowardsGoal = true;
         }
-        AllObjects = GameObject.FindGameObjectsWithTag("Nucl").ToList();
-        Player = GameObject.FindGameObjectWithTag("Drone");
-        Goal = GameObject.FindGameObjectWithTag("Goal");
-    }
-    // Update is called once per frame
-    void Update()
-    {
         if (stunned == false)
         {
             GermMovementFunction();

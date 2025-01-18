@@ -112,7 +112,7 @@ MonoBehaviour:
   NearestNucl: {fileID: 0}
   Player: {fileID: 0}
   Goal: {fileID: 0}
-  aggression: 0
+  aggression: 3
 --- !u!61 &104457680053145666
 BoxCollider2D:
   m_ObjectHideFlags: 0
