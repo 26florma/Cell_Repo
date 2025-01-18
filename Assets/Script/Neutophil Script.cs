@@ -27,7 +27,6 @@ public class NeutophilScript : MonoBehaviour
     void Start()
     {
       FindNearestGerm();
-        Debug.Log(Random.Range(1, 5));
     }
 
     // Update is called once per frame
@@ -53,7 +52,11 @@ public class NeutophilScript : MonoBehaviour
                     break;
             }
         }
-        if(onGerm == true)
+        if (NearestGerm == null)
+        {
+            FindNearestGerm();
+        }
+        if (onGerm == true)
         {
             StartCoroutine(SelfStunningDelay());
             Debug.Log("running germ detection for selfstun");
@@ -99,7 +102,7 @@ public class NeutophilScript : MonoBehaviour
         {
             yield return new WaitForSeconds(phagocytosisAttackSpeed);
             //phagocytosis
-            if (onGerm == true)
+            if (onGerm == true && NearestGerm != null)
             {
                 GermMovement germMovement = NearestGerm.gameObject.GetComponent<GermMovement>();
                 germMovement.germHP -= neutrophilD;
