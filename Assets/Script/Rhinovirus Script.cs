@@ -6,7 +6,7 @@ using UnityEngine;
 public class RhinovirusScript : MonoBehaviour
 {
     public GameObject Cell;
-
+    public GameObject Nucl;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,19 +18,22 @@ public class RhinovirusScript : MonoBehaviour
     {
         if (Cell != null)
         {
-            CellsScript CellScript = Cell.gameObject.GetComponent<CellsScript>();
-            if (Cell != null && CellScript.cellIsAlive == false)
+            CellsScript cellScript = Cell.GetComponent<CellsScript>();
+            if (Cell != null && Nucl == null)
             {
-                CellScript.deadActions = "InfectedByVirus";
+                cellScript.deadActions = "InfectedByVirus";
             }
         } 
     }
     public void OnTriggerEnter2D(Collider2D CellObject)
     {
-     if(CellObject.gameObject.CompareTag("Cell"))
+     if(CellObject.gameObject.CompareTag("Nucl"))
+     {
+            Nucl = CellObject.gameObject;
+     }
+     if (CellObject.gameObject.CompareTag("Cell"))
      {
             Cell = CellObject.gameObject;
-            CellsScript CellScript = Cell.gameObject.GetComponent<CellsScript>();
      }
     }
 }

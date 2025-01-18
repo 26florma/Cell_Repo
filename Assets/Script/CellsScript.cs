@@ -8,33 +8,32 @@ public class CellsScript : MonoBehaviour
 {
 
     public bool breachedByGerm = false;
-    public bool cellIsAlive = true;
     public string deadActions;
     public int spawnUponInfection = 3;
 
-    public GameObject Pathogen;
+    public GameObject Nucleus;
+    public GameObject Rhinovirus;
     // Start is called before the first frame update
     void Start()
     {
+        
         
     }
     // Update is called once per frame
     void Update()
     {
-        if (breachedByGerm && Pathogen != null)
-        {
-
-            for (int i = 0; i < spawnUponInfection; i++)
+            if (Nucleus == null && breachedByGerm && Rhinovirus != null)
             {
-                Debug.Log("running germ infection");
-                if (cellIsAlive == false)
+
+                for (int i = 0; i < spawnUponInfection; i++)
                 {
+                    Debug.Log("running germ infection");
                     switch (deadActions)
                     {
                         case "InfectedByVirus":
-                            if (Pathogen != null)
+                            if (Rhinovirus != null)
                             {
-                                Instantiate(Pathogen, transform.position, transform.rotation);
+                                Instantiate(Rhinovirus, transform.position, transform.rotation);
                             }
                             break;
                         case "KilledByPathogen":
@@ -44,27 +43,22 @@ public class CellsScript : MonoBehaviour
                             Debug.Log("Error");
                             break;
                     }
+                if(i == spawnUponInfection)
+                {
+                    GermMovement RhinovirusScript = Rhinovirus.GetComponent<GermMovement>();
+                    RhinovirusScript.stunned = false;
+                    Destroy(gameObject);
+                }
+
                 }
             }
-        }
     }
 
     public void OnTriggerEnter2D(Collider2D GermObject)
     {
-        if(GermObject.gameObject.CompareTag("germ") && Pathogen != null)
+        if (GermObject.gameObject.CompareTag("germ"))
         {
          breachedByGerm = true;
-        }
-    }
-    public void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Nucl"))
-        {
-            cellIsAlive = true;
-        }
-        else
-        {
-            cellIsAlive = false;
         }
     }
     public void OnTriggerExit2D(Collider2D GermObject)

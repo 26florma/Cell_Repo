@@ -10,6 +10,7 @@ public class NucleusScript : MonoBehaviour
     public bool germIsAttacking = false;
     public List<GameObject> attackingGerm = new List<GameObject>();
 
+
     public GameObject Germ;
 
     // At the first frame runs the DamageDelay Coroutine
