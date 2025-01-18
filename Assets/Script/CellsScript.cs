@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
+using System.Linq;
+using UnityEditor.Experimental.GraphView;
 
 public class CellsScript : MonoBehaviour
 {
@@ -10,7 +12,7 @@ public class CellsScript : MonoBehaviour
     public bool breachedByGerm = false;
     public string deadActions;
     public int spawnUponInfection = 3;
-
+    public List<GameObject> AllPathogens= new List<GameObject>();
     public GameObject Nucleus;
     public GameObject Rhinovirus;
     // Start is called before the first frame update
@@ -24,16 +26,24 @@ public class CellsScript : MonoBehaviour
     {
             if (Nucleus == null && breachedByGerm && Rhinovirus != null)
             {
-
-                for (int i = 0; i < spawnUponInfection; i++)
+            int i = 0;
+                while(i <= spawnUponInfection)
                 {
-                    Debug.Log("running germ infection");
+                    if (i == spawnUponInfection)
+                    {
+                        GermMovement RhinovirusScript = Rhinovirus.GetComponent<GermMovement>();
+                        RhinovirusScript.stunned = false;
+                        Destroy(gameObject);
+
+                    }
+                Debug.Log("running germ infection");
                     switch (deadActions)
                     {
                         case "InfectedByVirus":
                             if (Rhinovirus != null)
                             {
-                                Instantiate(Rhinovirus, transform.position, transform.rotation);
+                            Instantiate(Rhinovirus, transform.position, transform.rotation);
+                            Debug.Log(i);
                             }
                             break;
                         case "KilledByPathogen":
@@ -43,13 +53,9 @@ public class CellsScript : MonoBehaviour
                             Debug.Log("Error");
                             break;
                     }
-                if(i == spawnUponInfection)
-                {
-                    GermMovement RhinovirusScript = Rhinovirus.GetComponent<GermMovement>();
-                    RhinovirusScript.stunned = false;
-                    Destroy(gameObject);
-                }
-
+                AllPathogens = GameObject.FindGameObjectsWithTag("Germ").ToList();
+                i++;
+                
                 }
             }
     }
