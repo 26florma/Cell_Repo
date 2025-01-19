@@ -15,9 +15,10 @@ public class NeutophilScript : MonoBehaviour
     public float distance;
     public bool onGerm = false;
     public bool selfStunned = false;
+    bool isOnDelay = false;
     public string chosenAttacks;
     public float selfStunDelay =3;
-
+    int Delay = 10;
 
     public GameObject[] AllGerms;
     public GameObject NearestGerm;
@@ -32,6 +33,20 @@ public class NeutophilScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (NearestGerm != null)
+        {
+            GermMovement germMovement = NearestGerm.gameObject.GetComponent<GermMovement>();
+            if (germMovement.germHP <= 0)
+            {
+                germMovement.stunned = false;
+                onGerm = false;
+                Destroy(NearestGerm);
+                NearestGerm = null;
+                FindNearestGerm();
+                StopCoroutine(startDelay());
+                StopCoroutine(Phagocytosis());
+            }
+        }
         if (NearestGerm != null)
         {
             if (selfStunned == false)
@@ -49,6 +64,7 @@ public class NeutophilScript : MonoBehaviour
                     break;
                 default:
                     StartCoroutine(Phagocytosis());
+                    StartCoroutine(startDelay());
                     break;
             }
         }
@@ -100,22 +116,19 @@ public class NeutophilScript : MonoBehaviour
         }
         IEnumerator Phagocytosis()
         {
+        while (isOnDelay == false && onGerm == true && NearestGerm != null)
+        {
             yield return new WaitForSeconds(phagocytosisAttackSpeed);
             //phagocytosis
-            if (onGerm == true && NearestGerm != null)
-            {
+            isOnDelay = true;
+            Debug.Log("running phagocytosis");
                 GermMovement germMovement = NearestGerm.gameObject.GetComponent<GermMovement>();
                 germMovement.germHP -= neutrophilD;
                 germMovement.stunned = true;
-                if (germMovement.germHP <= 0)
-                {
-                    germMovement.stunned = false;
-                    onGerm = false;
-                    Destroy(NearestGerm);
-                    NearestGerm = null;
-                    FindNearestGerm();
-                }
-            }
+                Delay = phagocytosisAttackSpeed;
+
+            StopCoroutine(Phagocytosis());
+        }
         }
         IEnumerator Toxin()
         {
@@ -145,4 +158,14 @@ public class NeutophilScript : MonoBehaviour
             }
 
         }
+    IEnumerator startDelay()
+    {
+        while (isOnDelay == true)
+        {
+            yield return new WaitForSeconds(Delay);
+            Debug.Log("running delay");
+            isOnDelay = false;
+        }
+        
+    }
 }
